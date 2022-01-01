@@ -13,7 +13,7 @@ const user = require("./routes/userRoute");
 app.use("/api/v1", product);
 app.use("/api/v1", user);
 
-// Middleware for Errors
+// Middleware for Errors Handling
 app.use(errorMiddleware);
 
 module.exports = app;
