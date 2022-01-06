@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/layout/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import Product from "./pages/Product";

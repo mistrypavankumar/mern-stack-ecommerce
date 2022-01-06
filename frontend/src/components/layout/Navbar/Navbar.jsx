@@ -15,6 +15,11 @@ const isNotActiveStyle = "font-semibold opacity-50 transition-all duration-500";
 const Navbar = ({ webName, menuOptions }) => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
+  const handlecloseToggle = () => {
+    setToggleSidebar(true);
+    console.log("You clicked");
+  };
+
   return (
     <>
       <div className="w-full bg-primaryBlue py-4 md:py-5 px-8 lg:px-24 rounded-bl-3xl rounded-br-3xl text-primaryBlue border-b-2 border-b-borderGlowBlue shadow-lg shadow-cyan-500/50">
@@ -46,11 +51,17 @@ const Navbar = ({ webName, menuOptions }) => {
             <CustomIcon Icon={AiOutlineSearch} />
             <CustomIcon Icon={AiOutlineUser} />
             <CustomIcon Icon={AiOutlineShoppingCart} />
-            <CustomIcon Icon={AiOutlineMenu} customStyle="block md:hidden" />
+            <CustomIcon
+              Icon={AiOutlineMenu}
+              onClick={handlecloseToggle}
+              customStyle="block md:hidden"
+            />
           </div>
         </div>
       </div>
-      {toggleSidebar && <Slider menuOptions={menuOptions} />}
+      {toggleSidebar && (
+        <Slider menuOptions={menuOptions} closeToggle={toggleSidebar} />
+      )}
     </>
   );
 };

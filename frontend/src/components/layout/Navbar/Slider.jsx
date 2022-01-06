@@ -15,19 +15,18 @@ const Slider = ({ menuOptions, closeToggle }) => {
     <>
       <div
         className={`md:hidden w-screen h-screen absolute top-0 left-0 ${
-          closeToggle ? "-translate-x-100" : "translate-x-0"
+          closeToggle ? "animate-slide-in" : "animate-slide-fwd"
         }`}
       >
         <div className="flex flex-col z-20 justify-center items-center bg-primaryBlue w-340 h-screen">
           {menuOptions.map((menu, index) => {
             return (
-              <div className="my-10 text-primaryBlue font-semibold">
+              <div key={index} className="my-10 text-primaryBlue font-semibold">
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? isActiveStyle : isNotActiveStyle
                   }
                   onClick={handleCloseToggle}
-                  key={index}
                   to={menu.path}
                 >
                   {menu.menuName}
@@ -36,7 +35,6 @@ const Slider = ({ menuOptions, closeToggle }) => {
             );
           })}
         </div>
-        <div className="bg-red-200/60 md:hidden -z-10 w-full h-full absolute top-0 left-0" />
       </div>
     </>
   );
