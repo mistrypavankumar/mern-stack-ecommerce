@@ -1,0 +1,52 @@
+import React from "react";
+import FooterContent from "./FooterContent";
+import paymentIcon from "../../../assets/icons/payment.png";
+
+const Footer = ({ jsonData }) => {
+  const footerData = jsonData[0];
+  const heading = footerData.heading[0];
+
+  return (
+    <div className="bg-primaryBlue">
+      <div className="flex flex-col lg:justify-center lg:flex-row py-16 px-8 lg:px-24">
+        <div className="lg:w-1/4 flex items-center">
+          <h1 className="text-primaryBlue font-bold text-2xl text-center md:text-left pb-5">
+            {footerData.companyName}
+          </h1>
+        </div>
+        <div className="lg:w-1/3 pr-10">
+          <h1 className="text-primaryBlue font-semibold uppercase tracking-widest">
+            {heading.aboutus}
+          </h1>
+          <p className="mt-5 text-lightGray">{footerData.aboutCompany}</p>
+        </div>
+        <div className="mt-5 mb-5 lg:mt-0 lg:mb-0 lg:w-1/3">
+          <FooterContent
+            title={heading.information}
+            data={footerData.infoData}
+          />
+        </div>
+        <div className="lg:w-1/3">
+          <FooterContent
+            title={heading.account}
+            data={footerData.accountInfo}
+          />
+        </div>
+      </div>
+      <div className="bg-primaryDarkBlue py-5 px-8 md:px-24 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <p className="text-lightGray tracking-wider text-sm text-center">
+            © 2021{" "}
+            <span className="text-primaryBlue"> {footerData.companyName} </span>{" "}
+            Made with ❤️ By Misty Pavan Kumar
+          </p>
+        </div>
+        <div className="mt-3 md:mt-0">
+          <img src={paymentIcon} alt="payment_method" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Footer;

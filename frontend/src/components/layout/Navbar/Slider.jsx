@@ -1,24 +1,32 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai";
+import CustomIcon from "./../../Icons/CustomIcon";
 
 const isActiveStyle = "font-semibold opacity-100 transition-all duration-500";
 const isNotActiveStyle = "font-semibold opacity-50 transition-all duration-500";
 
-const Slider = ({ menuOptions, closeToggle }) => {
+const Slider = ({ menuOptions, setCloseToggle, closeToggle }) => {
   const handleCloseToggle = () => {
-    if (closeToggle) {
-      closeToggle(false);
-    }
+    if (closeToggle) setCloseToggle(false);
   };
 
   return (
     <>
       <div
         className={`md:hidden w-screen h-screen absolute top-0 left-0 ${
-          closeToggle ? "animate-slide-in" : "animate-slide-fwd"
+          closeToggle && "animate-slide-in"
         }`}
       >
-        <div className="flex flex-col z-20 justify-center items-center bg-primaryBlue w-340 h-screen">
+        <div className="flex flex-col relative z-20 justify-center items-center bg-primaryBlue w-4/5 h-screen">
+          <div className="absolute top-3 right-3 text-primaryBlue">
+            <CustomIcon
+              Icon={AiOutlineClose}
+              onClick={handleCloseToggle}
+              customStyle="text-3xl"
+            />
+          </div>
+
           {menuOptions.map((menu, index) => {
             return (
               <div key={index} className="my-10 text-primaryBlue font-semibold">

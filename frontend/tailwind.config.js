@@ -59,6 +59,16 @@ module.exports = {
             transform: "translateX(0px)",
           },
         },
+        "slide-out": {
+          "0%": {
+            "-webkit-transform": "translateX(0px)",
+            transform: "translateX(0px)",
+          },
+          "100%": {
+            "-webkit-transform": "translateX(-200px)",
+            transform: "translateX(-200px)",
+          },
+        },
 
         "slide-fwd": {
           "0%": {
