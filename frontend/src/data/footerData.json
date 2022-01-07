@@ -1,0 +1,49 @@
+[
+    {
+        "companyName": "E-Commerce",
+        "aboutCompany": "Lorem ipsu dotor sit amet cons adipisicing elit sed do eisum tempor inddicent ut labor et dolore mangna aliqua. Ut enim ad minim veniam, quix nostruds",
+        "heading": [
+            {
+                "aboutus": "About Us",
+                "information": "Inforamtion",
+                "account": "Account"
+            }
+        ],
+        "infoData": [
+            {
+                "link": "About Us",
+                "path": "/aboutus"
+            },
+            {
+                "link": "Delivery Information",
+                "path": "/deliveryInfo"
+            },
+            {
+                "link": "Privacy & Policy",
+                "path": "/privacyandpolicy"
+            },
+            {
+                "link": "Products",
+                "path": "/products"
+            }
+        ],
+        "accountInfo": [
+            {
+                "link": "My Account",
+                "path": "/myaccount"
+            },
+            {
+                "link": "My Cart",
+                "path": "/cart"
+            },
+            {
+                "link": "Login",
+                "path": "/login"
+            },
+            {
+                "link": "Checkout",
+                "path": "/checkout"
+            }
+        ]
+    }
+]

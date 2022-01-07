@@ -17,7 +17,6 @@ const Navbar = ({ webName, menuOptions }) => {
 
   const handlecloseToggle = () => {
     setToggleSidebar(true);
-    console.log("You clicked");
   };
 
   return (
@@ -60,7 +59,11 @@ const Navbar = ({ webName, menuOptions }) => {
         </div>
       </div>
       {toggleSidebar && (
-        <Slider menuOptions={menuOptions} closeToggle={toggleSidebar} />
+        <Slider
+          menuOptions={menuOptions}
+          setCloseToggle={setToggleSidebar}
+          closeToggle={toggleSidebar}
+        />
       )}
     </>
   );
