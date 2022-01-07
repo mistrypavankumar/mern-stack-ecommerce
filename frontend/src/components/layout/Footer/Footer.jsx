@@ -1,10 +1,24 @@
 import React from "react";
 import FooterContent from "./FooterContent";
+import CustomIcon from "./../../Icons/CustomIcon";
 import paymentIcon from "../../../assets/icons/payment.png";
+import {
+  AiOutlineFacebook,
+  AiOutlineTwitter,
+  AiOutlineInstagram,
+} from "react-icons/ai";
 
 const Footer = ({ jsonData }) => {
   const footerData = jsonData[0];
   const heading = footerData.heading[0];
+  const socailMediaData = footerData.socialMediaLinks;
+
+  // soical media icons list
+  const socialMediaIcons = [
+    AiOutlineFacebook,
+    AiOutlineTwitter,
+    AiOutlineInstagram,
+  ];
 
   return (
     <div className="bg-primaryBlue">
@@ -19,6 +33,19 @@ const Footer = ({ jsonData }) => {
             {heading.aboutus}
           </h1>
           <p className="mt-5 text-lightGray">{footerData.aboutCompany}</p>
+          <div className="flex gap-3 mt-5 justify-start items-center">
+            {socailMediaData &&
+              socailMediaData.map((data, index) => {
+                return (
+                  <a
+                    className="rounded-xl hover:bg-secondaryColor transition-all duration-500 text-white"
+                    href={data.link}
+                  >
+                    <CustomIcon Icon={socialMediaIcons[index]} />
+                  </a>
+                );
+              })}
+          </div>
         </div>
         <div className="mt-5 mb-5 lg:mt-0 lg:mb-0 lg:w-1/3">
           <FooterContent
