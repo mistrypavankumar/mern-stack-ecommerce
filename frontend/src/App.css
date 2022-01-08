@@ -11,6 +11,17 @@ input[type="number"]{
   -moz-appearance: textfield;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 
 .customBanner{
   flex-direction: column;
@@ -26,3 +37,71 @@ input[type="number"]{
   background-color: #fff;
   clip-path: polygon(100% 73%, 0% 100%, 100% 100%);;
 }
+
+
+/* pagination style start */
+
+.paginationBox{
+  display: flex;
+  justify-content: center;
+  margin: 6vmax;
+}
+
+.paginationBox .pagination{
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+
+.paginationBox .pagination .page-item{
+  background-color: #fff;
+  list-style: none;
+  border: 1px solid rgba(0,0,0,0.178);
+  padding: 1vmax 1.5vmax;
+  cursor: pointer;
+  transition: all 0.3s linear;
+
+}
+
+.page-item:first-child{
+  border-radius: 5px 0 0 5px;
+}
+
+.page-item:last-child{
+  border-radius: 0 5px 5px 0;
+}
+
+.page-item .page-link{
+  text-decoration: none;
+  font: 300 0.7vmax;
+  color: rgb(80,80,80);
+  transition: all 0.3s linear;
+}
+
+.paginationBox .pagination .page-item:hover{
+  background-color: rgb(230,230,230);
+  color: red;
+}
+
+.paginationBox .pagination .page-item:hover .page-link{
+  color: rgb(80,80,80);
+}
+
+.paginationBox .pagination .pageItemActive{
+  background-color: #0e8f99;
+}
+
+.paginationBox .pagination .pageItemActive:hover{
+  background-color: #0e8f99;
+}
+
+.paginationBox .pagination .pageItemActive .pageLinkActive{
+  color: #fff;
+}
+
+.paginationBox .pagination .pageItemActive:hover .pageLinkActive{
+  color: #fff;
+}
+
+/* pagination style end */
