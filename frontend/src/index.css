@@ -9,8 +9,20 @@
   *{
     scroll-behavior: smooth;
   }
-  
+
   body {
     font-family: 'Poppins', sans-serif;
   }
+  
+}
+
+@layer utilities{
+  .quantityBtn{
+    @apply outline-none px-4 py-1 text-white bg-secondaryDark opacity-75 hover:opacity-100 transition-opacity duration-300;
+  }
+
+  .commonBtnStyle{
+    @apply text-white rounded-md text-xs opacity-90 hover:opacity-100 transition-all duration-300 outline-none;
+  }
+  
 }

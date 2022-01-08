@@ -38,6 +38,7 @@ const Footer = ({ jsonData }) => {
               socailMediaData.map((data, index) => {
                 return (
                   <a
+                    key={index}
                     className="rounded-xl hover:bg-secondaryColor transition-all duration-500 text-white"
                     href={data.link}
                   >
