@@ -72,7 +72,9 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
     .filter()
     .pagination(resultPerPage);
   const products = await apiFeatures.query;
-  res.status(200).json({ success: true, products, productsCount });
+  res
+    .status(200)
+    .json({ success: true, products, productsCount, resultPerPage });
 });
 
 // create a new review or update the review

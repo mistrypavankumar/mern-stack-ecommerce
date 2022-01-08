@@ -9,6 +9,9 @@ import WebFont from "webfontloader";
 import Footer from "./components/layout/Footer/Footer";
 import footerData from "./data/footerData.json";
 import "./App.css";
+import Products from "./pages/Products";
+import PageNotFound from "./pages/PageNotFound";
+import SearchProducts from "./pages/SearchProducts";
 
 const menuOptions = [
   {
@@ -46,9 +49,17 @@ function App() {
       {/* All routes */}
       <Routes>
         <Route path="/" element={<HomePage />} />
+
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:keyword" element={<Products />} />
+
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/search" element={<SearchProducts />} />
+
+        {/* If router is not specified then show below page */}
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
 
       {/* Footer component */}

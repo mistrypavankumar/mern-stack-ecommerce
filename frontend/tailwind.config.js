@@ -103,5 +103,11 @@ module.exports = {
     },
   },
 
-  plugins: [],
+  variant: {
+    extends: {
+      lineClamp: ["hover"],
+    },
+  },
+
+  plugins: [require("@tailwindcss/line-clamp")],
 };

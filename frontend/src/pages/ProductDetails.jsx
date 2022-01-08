@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductDetails } from "../actions/productAction";
+import { clearErrors, getProductDetails } from "../actions/productAction";
 import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import Loader from "../components/layout/Loader/Loader";
 import { useAlert } from "react-alert";
+import ReviewCard from "../components/home/ReviewCard/ReviewCard";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (error) {
-      return alert.error(error);
+      alert.error(error);
+      dispatch(clearErrors());
     }
     dispatch(getProductDetails(id));
   }, [dispatch, id, error, alert]);
@@ -116,6 +118,26 @@ const ProductDetails = () => {
           </div>
         </div>
       )}
+
+      <div className="py-5">
+        <h1 className="headingStyle uppercase">
+          <div className="headingStylesDiv" />
+          Reviews{" "}
+        </h1>
+
+        {product.reviews && product.reviews[0] ? (
+          <div className="flex gap-5 px-10 my-10 no-scrollbar overflow-x-auto">
+            {product.reviews &&
+              product.reviews.map((review, id) => {
+                return <ReviewCard key={id} review={review} />;
+              })}
+          </div>
+        ) : (
+          <p className="text-center py-24 text-2xl text-slate-400">
+            No Reviews Yet
+          </p>
+        )}
+      </div>
     </Fragment>
   );
 };

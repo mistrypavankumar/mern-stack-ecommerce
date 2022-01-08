@@ -47,10 +47,11 @@ const Navbar = ({ webName, menuOptions }) => {
           </div>
 
           <div className="flex gap-4 md:gap-6">
-            <CustomIcon Icon={AiOutlineSearch} />
-            <CustomIcon Icon={AiOutlineUser} />
-            <CustomIcon Icon={AiOutlineShoppingCart} />
+            <CustomIcon path="/search" Icon={AiOutlineSearch} />
+            <CustomIcon path="/profile" Icon={AiOutlineUser} />
+            <CustomIcon path="/cart" Icon={AiOutlineShoppingCart} />
             <CustomIcon
+              path="/#"
               Icon={AiOutlineMenu}
               onClick={handlecloseToggle}
               customStyle="block md:hidden"

@@ -5,7 +5,7 @@ import companydata from "./../data/companydata.json";
 import MetaData from "./../components/layout/MetaData";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getProduct } from "../actions/productAction";
+import { clearErrors, getProduct } from "../actions/productAction";
 import Loader from "../components/layout/Loader/Loader";
 import { useAlert } from "react-alert";
 
@@ -26,7 +26,8 @@ const HomePage = () => {
 
   useEffect(() => {
     if (error) {
-      return alert.error(error);
+      alert.error(error);
+      dispatch(clearErrors());
     }
 
     dispatch(getProduct());

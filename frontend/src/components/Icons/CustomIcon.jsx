@@ -1,13 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const CustomIcon = ({ Icon, customStyle, onClick }) => {
+const CustomIcon = ({ Icon, customStyle, onClick, path }) => {
   return (
-    <div
+    <Link
+      to={path ? path : "/#"}
       onClick={onClick}
       className={`text-xl md:text-2xl cursor-pointer opacity-70 hover:opacity-100 p-1 transition-opacity duration-500 ${customStyle}`}
     >
       <Icon />
-    </div>
+    </Link>
   );
 };
 
