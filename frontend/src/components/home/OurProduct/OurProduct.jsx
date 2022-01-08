@@ -1,14 +1,7 @@
 import React from "react";
 import Product from "./Product";
 
-const products = {
-  name: "Blue Shirt",
-  images: [{ url: "https://i.ibb.co/DRST11n/1.webp" }],
-  price: "Rs.3000",
-  _id: "pavankumar",
-};
-
-const OurProduct = () => {
+const OurProduct = ({ products }) => {
   return (
     <div className="h-auto md:px-24" id="ourproduct">
       <div className="py-10 px-8 md:px-0">
@@ -18,14 +11,10 @@ const OurProduct = () => {
         </h1>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-10 gap-y-5">
-          <Product products={products} />
-          <Product products={products} />
-          <Product products={products} />
-          <Product products={products} />
-          <Product products={products} />
-          <Product products={products} />
-          <Product products={products} />
-          <Product products={products} />
+          {products &&
+            products.map((product, index) => {
+              return <Product key={index} product={product} />;
+            })}
         </div>
       </div>
     </div>

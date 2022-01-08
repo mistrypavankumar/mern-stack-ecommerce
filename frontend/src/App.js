@@ -3,7 +3,7 @@ import Navbar from "./components/layout/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
-import Product from "./pages/Product";
+import ProductDetails from "./pages/ProductDetails";
 import { useEffect } from "react";
 import WebFont from "webfontloader";
 import Footer from "./components/layout/Footer/Footer";
@@ -46,7 +46,7 @@ function App() {
       {/* All routes */}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<Product />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
       </Routes>
