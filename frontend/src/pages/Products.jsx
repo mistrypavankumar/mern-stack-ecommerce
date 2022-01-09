@@ -6,9 +6,17 @@ import ProductCard from "../components/home/OurProduct/ProductCard";
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import FilterSlide from "../components/Products/FilterSlide";
 
-import Slider from "@material-ui/core/Slider";
-import Typography from "@material-ui/core/Typography";
+const categories = [
+  "Laptop",
+  "Footwear",
+  "Bottom",
+  "Tops",
+  "Attire",
+  "Camera",
+  "SmartPhones",
+];
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -18,8 +26,9 @@ const Products = () => {
     useSelector((state) => state.products);
 
   const [price, setPrice] = useState([0, 25000]);
-
+  const [category, setCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [ratings, setRatings] = useState(0);
 
   const keyword = params.keyword;
 
@@ -37,8 +46,8 @@ const Products = () => {
       dispatch(clearErrors());
     }
 
-    dispatch(getProduct(keyword, currentPage, price));
-  }, [dispatch, error, alert, keyword, currentPage, price]);
+    dispatch(getProduct(keyword, currentPage, price, category, ratings));
+  }, [dispatch, error, alert, keyword, currentPage, price, category, ratings]);
 
   return (
     <Fragment>
@@ -46,13 +55,13 @@ const Products = () => {
         <Loader />
       ) : (
         <Fragment>
-          <div className="h-auto py-24 md:px-10 flex flex-col justify-center items-center">
+          <div className="h-auto py-24 md:px-10 ">
             <h1 className="headingStyle">
               <div className="headingStylesDiv" />
               Products
             </h1>
 
-            <div className="flex flex-row-reverse">
+            <div className="flex flex-row-reverse justify-center ">
               <div className="productsLayoutStyle">
                 {products &&
                   products.map((product, index) => {
@@ -60,17 +69,14 @@ const Products = () => {
                   })}
               </div>
 
-              <div className="border-2 w-1/6">
-                <Typography>Price</Typography>
-                <Slider
-                  value={price}
-                  onChange={priceHandler}
-                  valueLabelDisplay="auto"
-                  aria-labelledby="range-slider"
-                  min={0}
-                  max={25000}
-                />
-              </div>
+              <FilterSlide
+                price={price}
+                categories={categories}
+                priceHandler={priceHandler}
+                setCategory={setCategory}
+                ratings={ratings}
+                setRatings={setRatings}
+              />
             </div>
           </div>
 

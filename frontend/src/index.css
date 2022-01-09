@@ -47,5 +47,9 @@
   .productsLayoutStyle{
     @apply flex flex-wrap px-24 gap-5 mt-10;
   }
+
+  .filterHeadingStyle{
+    @apply  text-secondaryDark font-semibold tracking-wide;
+  }
   
 }
