@@ -7,6 +7,7 @@ import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import FilterSlide from "../components/Products/FilterSlide";
+import MetaData from "../components/layout/MetaData";
 
 const categories = [
   "Laptop",
@@ -55,6 +56,7 @@ const Products = () => {
         <Loader />
       ) : (
         <Fragment>
+          <MetaData title="Products | E-Commerce" />
           <div className="h-auto py-24 md:px-10 ">
             <h1 className="headingStyle">
               <div className="headingStylesDiv" />

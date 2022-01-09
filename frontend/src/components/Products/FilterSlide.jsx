@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Slider from "@material-ui/core/Slider";
 import { MdClose, MdArrowForward } from "react-icons/md";
