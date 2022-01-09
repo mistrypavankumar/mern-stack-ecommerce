@@ -48,8 +48,9 @@ const Navbar = ({ webName, menuOptions }) => {
 
           <div className="flex gap-4 md:gap-6">
             <CustomIcon path="/search" Icon={AiOutlineSearch} />
-            <CustomIcon path="/profile" Icon={AiOutlineUser} />
+
             <CustomIcon path="/cart" Icon={AiOutlineShoppingCart} />
+            <CustomIcon path="/login" Icon={AiOutlineUser} />
             <CustomIcon
               path="/#"
               Icon={AiOutlineMenu}

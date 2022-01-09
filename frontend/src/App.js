@@ -12,6 +12,7 @@ import "./App.css";
 import Products from "./pages/Products";
 import PageNotFound from "./pages/PageNotFound";
 import SearchProducts from "./pages/SearchProducts";
+import LoginSignUp from "./pages/User/LoginSignUp";
 
 const menuOptions = [
   {
@@ -57,6 +58,9 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/search" element={<SearchProducts />} />
+
+        {/* Authentication routes */}
+        <Route path="/login" element={<LoginSignUp />} />
 
         {/* If router is not specified then show below page */}
         <Route path="/*" element={<PageNotFound />} />
