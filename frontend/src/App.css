@@ -105,3 +105,26 @@ input[type="number"]{
 }
 
 /* pagination style end */
+
+
+/* LoginSignUp form Styles start */
+
+.shiftToLeft{
+  transform: translateX(-100%);
+}
+
+.shiftToNeutral{
+  transform: translateX(0%);
+}
+
+.shiftToNeutralForm{
+  transform: translateX(0%) translateY(-100%);
+}
+
+.shiftToRight{
+  transform: translateX(100%);
+}
+
+
+
+/* LoginSignUp form Styles end */
