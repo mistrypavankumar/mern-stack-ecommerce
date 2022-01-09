@@ -7,6 +7,7 @@ import ReactStars from "react-rating-stars-component";
 import Loader from "../components/layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import ReviewCard from "../components/home/ReviewCard/ReviewCard";
+import MetaData from "../components/layout/MetaData";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const ProductDetails = () => {
         <Loader />
       ) : (
         <div className="w-full py-24 px-8 md:px-24 flex flex-col md:flex-row justify-center bg-secColor">
+          <MetaData title={`${product.name} | E-Commerce`} />
           <div className="w-full flex justify-center md:w-1/2 md:p-10 overflow-hidden ">
             <Carousel className="w-full md:w-3/5">
               {product.image &&
