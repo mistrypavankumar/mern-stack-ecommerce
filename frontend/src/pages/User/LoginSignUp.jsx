@@ -1,16 +1,49 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { MdMailOutline, MdLockOpen, MdFace } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/user/Button";
 import InputField from "../../components/user/InputField";
+import Loader from "../../components/layout/Loader/Loader";
+
+import { useDispatch, useSelector } from "react-redux";
+import { clearErrors, login, register } from "../../actions/userAction";
+import { useAlert } from "react-alert";
 
 const LoginSignUp = () => {
+  // for navigation
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { error, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
+  const alert = useAlert();
+
   const loginTab = useRef(null);
   const registerTab = useRef(null);
   const switcherTab = useRef(null);
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+
+  const [avatar, setAvatar] = useState("/profile.png");
+  const [avatarPreview, setAvatarPreview] = useState("/profile.png");
+
+  const [registerName, setRegisterName] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+  const [registerEmail, setRegisterEmail] = useState("");
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+
+    if (isAuthenticated) {
+      navigate("/account", { replace: true });
+    }
+  }, [error, alert, dispatch, isAuthenticated, navigate]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -29,124 +62,169 @@ const LoginSignUp = () => {
       loginTab.current.classList.add("shiftToLeft");
     }
   };
-  const loginSubmit = () => {};
+
+  const loginSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(login(loginEmail, loginPassword));
+  };
+
+  const registerSubmit = (e) => {
+    e.preventDefault();
+
+    const myForm = new FormData();
+
+    myForm.set("name", registerName);
+    myForm.set("email", registerEmail);
+    myForm.set("password", registerPassword);
+    myForm.set("avatar", avatar);
+
+    if (registerPassword !== cpassword) {
+      alert.error("password doesn't match");
+    }
+
+    dispatch(register(myForm));
+  };
+
+  const registerDataChange = (e) => {
+    if (e.target.name === "avatar") {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
+        }
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
 
   return (
     <>
-      <div className="h-screen px-8 py-24 bg-slate-200 md:px-24">
-        <div className="bg-white w-full md:w-[55vh] h-[70vh] rounded-lg overflow-hidden mx-auto py-5 px-5">
-          <div>
-            <div className="flex justify-evenly">
-              <p
-                className="grid place-items-center cursor-pointer hover:text-secondaryDark"
-                onClick={(e) => switchTabs(e, "login")}
-              >
-                Login
-              </p>
-              <p
-                className="grid place-items-center cursor-pointer hover:text-secondaryDark"
-                onClick={(e) => switchTabs(e, "register")}
-              >
-                Register
-              </p>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="h-screen px-8 py-24 bg-slate-200 md:px-24">
+          <div className="bg-white shadow-lg w-full md:w-[55vh] h-[70vh] rounded-lg overflow-hidden mx-auto py-5 px-5">
+            <div>
+              <div className="flex justify-evenly">
+                <p
+                  className="grid place-items-center cursor-pointer hover:text-secondaryDark"
+                  onClick={(e) => switchTabs(e, "login")}
+                >
+                  Login
+                </p>
+                <p
+                  className="grid place-items-center cursor-pointer hover:text-secondaryDark"
+                  onClick={(e) => switchTabs(e, "register")}
+                >
+                  Register
+                </p>
+              </div>
+              <button
+                className="h-[3px] bg-primaryBlue w-1/2 transition-all duration-500"
+                ref={switcherTab}
+              ></button>
             </div>
-            <button
-              className="h-[3px] bg-primaryBlue w-1/2 transition-all duration-500"
-              ref={switcherTab}
-            ></button>
-          </div>
-          <form
-            className="flex flex-col justify-evenly items-center h-[80%] "
-            ref={loginTab}
-            onSubmit={loginSubmit}
-          >
-            <div className="flex justify-evenly flex-col h-[50%]">
-              <InputField
-                inputType="text"
-                placeholder="Email"
-                Icon={MdMailOutline}
-                value={loginEmail}
-                setOnChangeValue={(e) => setLoginEmail(e.target.value)}
-              />
-
-              <InputField
-                inputType="password"
-                placeholder="Password"
-                Icon={MdLockOpen}
-                value={loginPassword}
-                setOnChangeValue={(e) => setLoginPassword(e.target.value)}
-              />
-            </div>
-
-            <Link
-              to="/password/forget"
-              className="text-secondaryDark hover:text-primaryBlue transition-all duration-500"
+            <form
+              className="flex flex-col justify-evenly items-center h-[80%] transition-transform duration-500 "
+              ref={loginTab}
+              onSubmit={loginSubmit}
             >
-              Forget Password ?
-            </Link>
-            <Button label="Login" />
-          </form>
+              <div className="flex justify-evenly flex-col h-[50%]">
+                <InputField
+                  inputType="text"
+                  name="email"
+                  placeholder="Email"
+                  Icon={MdMailOutline}
+                  value={loginEmail}
+                  setOnChangeValue={(e) => setLoginEmail(e.target.value)}
+                />
 
-          <form
-            className="flex flex-col justify-evenly items-center h-[80%] "
-            ref={registerTab}
-            encType="multipart/form-data"
-            onSubmit={registerSubmit}
-          >
-            <div className="flex justify-evenly flex-col h-[50%]">
-              <InputField
-                inputType="text"
-                placeholder="Enter your name"
-                Icon={MdFace}
-                value={name}
-                setOnChangeValue={registerDataChange}
-              />
-
-              <InputField
-                inputType="text"
-                placeholder="Enter your email"
-                Icon={MdMailOutline}
-                value={loginEmail}
-                setOnChangeValue={registerDataChange}
-              />
-
-              <InputField
-                inputType="password"
-                placeholder="Enter your password"
-                Icon={MdLockOpen}
-                value={loginPassword}
-                setOnChangeValue={registerDataChange}
-              />
-
-              <InputField
-                inputType="password"
-                placeholder="Comfirm your password"
-                Icon={MdLockOpen}
-                value={loginPassword}
-                setOnChangeValue={registerDataChange}
-              />
-
-              <div>
-                <img src="" alt="avatar preview" />
-                <input
-                  type="file"
-                  name="avatar"
-                  accept="image/*"
-                  onChange={registerDataChange}
+                <InputField
+                  inputType="password"
+                  name="password"
+                  placeholder="Password"
+                  Icon={MdLockOpen}
+                  value={loginPassword}
+                  setOnChangeValue={(e) => setLoginPassword(e.target.value)}
                 />
               </div>
-            </div>
 
-            <Link
-              to="/password/forget"
-              className="text-secondaryDark hover:text-primaryBlue transition-all duration-500"
+              <Link
+                to="/password/forget"
+                className="text-secondaryDark hover:text-primaryBlue transition-all duration-500"
+              >
+                Forget Password ?
+              </Link>
+              <Button label="Login" />
+            </form>
+
+            <form
+              className="signUpForm transition-transform duration-500 flex flex-col justify-evenly items-center h-[80%] "
+              ref={registerTab}
+              encType="multipart/form-data"
+              onSubmit={registerSubmit}
             >
-              Forget Password ?
-            </Link>
-            <Button label="Login" />
-          </form>
+              <div className="flex justify-evenly flex-col h-full ">
+                <InputField
+                  inputType="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  Icon={MdFace}
+                  value={registerName}
+                  setOnChangeValue={(e) => setRegisterName(e.target.value)}
+                />
+
+                <InputField
+                  inputType="text"
+                  name="email"
+                  placeholder="Enter your email"
+                  Icon={MdMailOutline}
+                  value={registerEmail}
+                  setOnChangeValue={(e) => setRegisterEmail(e.target.value)}
+                />
+
+                <InputField
+                  inputType="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  Icon={MdLockOpen}
+                  value={registerPassword}
+                  setOnChangeValue={(e) => setRegisterPassword(e.target.value)}
+                />
+
+                <InputField
+                  inputType="password"
+                  name="cpassword"
+                  placeholder="Comfirm your password"
+                  Icon={MdLockOpen}
+                  value={cpassword}
+                  setOnChangeValue={(e) => setCpassword(e.target.value)}
+                />
+
+                <div className="flex items-center gap-5">
+                  <img
+                    src={avatarPreview}
+                    className="w-10 h-10 rounded-full"
+                    alt="avatar preview"
+                  />
+                  <input
+                    className="avatarChoose border-2 rounded-lg "
+                    type="file"
+                    name="avatar"
+                    accept="image/*"
+                    onChange={registerDataChange}
+                  />
+                </div>
+              </div>
+              <Button label="Sign Up" />
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

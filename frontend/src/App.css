@@ -109,6 +109,10 @@ input[type="number"]{
 
 /* LoginSignUp form Styles start */
 
+.signUpForm{
+  transform: translateY(-100%) translateX(-100vmax);
+}
+
 .shiftToLeft{
   transform: translateX(-100%);
 }
@@ -124,6 +128,26 @@ input[type="number"]{
 .shiftToRight{
   transform: translateX(100%);
 }
+
+input.avatarChoose::file-selector-button{
+  cursor: pointer;
+  padding: 0;
+  height: 5vh;
+  width: 100%;
+  border: none;
+  z-index: 2;
+  margin: 0;
+  transition: all .5s;
+  padding: 0 1vmax;
+  color: rgba(0,0,0,0.623);
+  background-color: #fff;
+
+}
+
+input.avatarChoose::file-selector-button:hover{
+  background-color: rgb(235,235,235);
+}
+
 
 
 
