@@ -5,6 +5,7 @@ const InputField = ({
   placeholder,
   value,
   inputType,
+  name,
   setOnChangeValue,
 }) => {
   return (
@@ -13,9 +14,11 @@ const InputField = ({
       <input
         className="px-3 py-2 outline-none border-2 w-full"
         type={inputType}
+        name={name?.name}
         placeholder={placeholder}
         value={value}
         onChange={setOnChangeValue}
+        required
       />
     </div>
   );
