@@ -110,11 +110,11 @@ input[type="number"]{
 /* LoginSignUp form Styles start */
 
 .signUpForm{
-  transform: translateY(-100%) translateX(-100vmax);
+  transform: translateY(-100%) translateX(-120%);
 }
 
 .shiftToLeft{
-  transform: translateX(-100%);
+  transform: translateX(-120%);
 }
 
 .shiftToNeutral{
@@ -148,7 +148,14 @@ input.avatarChoose::file-selector-button:hover{
   background-color: rgb(235,235,235);
 }
 
-
-
-
 /* LoginSignUp form Styles end */
+
+
+/* user options style in navbar start*/
+
+.MuiFab-root{
+  width: 35px !important;
+  height: 30px !important;
+  border: 2px solid #14cddb !important;
+}
+/* user options style in navbar ends */
