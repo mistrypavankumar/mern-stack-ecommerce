@@ -8,12 +8,15 @@ import {
 import CustomIcon from "../../Icons/CustomIcon";
 import { Link, NavLink } from "react-router-dom";
 import Slider from "./Slider";
+import { useSelector } from "react-redux";
+import UserOptions from "./UserOptions";
 
 const isActiveStyle = "font-semibold opacity-100 transition-all duration-500";
 const isNotActiveStyle = "font-semibold opacity-50 transition-all duration-500";
 
 const Navbar = ({ webName, menuOptions }) => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const handlecloseToggle = () => {
     setToggleSidebar(true);
@@ -46,11 +49,16 @@ const Navbar = ({ webName, menuOptions }) => {
             </div>
           </div>
 
-          <div className="flex gap-4 md:gap-6">
+          <div className="flex items-baseline gap-4 md:gap-6">
             <CustomIcon path="/search" Icon={AiOutlineSearch} />
 
             <CustomIcon path="/cart" Icon={AiOutlineShoppingCart} />
-            <CustomIcon path="/login" Icon={AiOutlineUser} />
+            {isAuthenticated ? (
+              <UserOptions user={user} />
+            ) : (
+              <CustomIcon path="/login" Icon={AiOutlineUser} />
+            )}
+
             <CustomIcon
               path="/#"
               Icon={AiOutlineMenu}

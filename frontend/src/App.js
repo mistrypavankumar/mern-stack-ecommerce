@@ -14,6 +14,12 @@ import PageNotFound from "./pages/PageNotFound";
 import SearchProducts from "./pages/SearchProducts";
 import LoginSignUp from "./pages/User/LoginSignUp";
 
+import store from "./store";
+import { useSelector } from "react-redux";
+import { loadUser } from "./actions/userAction";
+import UserOptions from "./components/layout/Navbar/UserOptions";
+import Profile from "./pages/User/Profile";
+
 const menuOptions = [
   {
     menuName: "Home",
@@ -34,12 +40,17 @@ const menuOptions = [
 ];
 
 function App() {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+
   useEffect(() => {
     WebFont.load({
       google: {
         families: ["Poppins", "Roboto"],
       },
     });
+
+    // loading user data
+    store.dispatch(loadUser());
   }, []);
 
   return (
@@ -58,6 +69,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/search" element={<SearchProducts />} />
+        <Route path="/account" element={<Profile />} />
 
         {/* Authentication routes */}
         <Route path="/login" element={<LoginSignUp />} />

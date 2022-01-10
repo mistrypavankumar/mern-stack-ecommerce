@@ -14,8 +14,8 @@ const Slider = ({ menuOptions, setCloseToggle, closeToggle }) => {
   return (
     <>
       <div
-        className={`md:hidden w-screen h-screen absolute top-0 left-0 ${
-          closeToggle && "animate-slide-in"
+        className={`md:hidden w-screen h-screen absolute top-0 left-0 z-50 transition-all duration-500 ${
+          closeToggle ? "animate-slide-in" : "-translate-x-95"
         }`}
       >
         <div className="flex flex-col relative z-20 justify-center items-center bg-primaryBlue w-4/5 h-screen">
