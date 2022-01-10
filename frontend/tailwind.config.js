@@ -29,6 +29,7 @@ module.exports = {
       borderColor: {
         primaryBlue: "#14cddb",
         secondaryDark: "#0e8f99",
+        primaryDarkBlue: "#022f47",
         borderBlue: "#3482E7",
         borderGlowBlue: "hsl(188, 100%, 62%)",
       },

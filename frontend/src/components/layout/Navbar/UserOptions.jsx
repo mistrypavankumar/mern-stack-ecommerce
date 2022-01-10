@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
 import { useNavigate } from "react-router-dom";
 import { Dashboard, Person, ExitToApp, ListAlt } from "@material-ui/icons";
@@ -26,7 +26,6 @@ const UserOptions = ({ user }) => {
   };
 
   const logoutUser = () => {
-    navigate("/login", { replace: true });
     store.dispatch(logout());
 
     alert.success("Logout Successfully");

@@ -69,9 +69,8 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/search" element={<SearchProducts />} />
-        <Route path="/account" element={<Profile />} />
+        {isAuthenticated && <Route path="/account" element={<Profile />} />}
 
-        {/* Authentication routes */}
         <Route path="/login" element={<LoginSignUp />} />
 
         {/* If router is not specified then show below page */}
