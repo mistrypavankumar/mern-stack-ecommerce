@@ -18,7 +18,7 @@ const ResetPassword = () => {
   const dispatch = useDispatch();
 
   const { loading, error, success } = useSelector(
-    (state) => state.forgetPassword
+    (state) => state.forgotPassword
   );
 
   const alert = useAlert();

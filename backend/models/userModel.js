@@ -66,22 +66,22 @@ userSchema.methods.getJWTToken = function () {
 };
 
 // compare password
-userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+userSchema.methods.comparePassword = function (enteredPassword) {
+  return bcrypt.compare(enteredPassword, this.password);
 };
 
-// Generating password reset token
-userSchema.methods.getResetPasswordToken = async function () {
-  // Generating token
+// Generating Password Reset Token
+userSchema.methods.getResetPasswordToken = function () {
+  // Generating Token
   const resetToken = crypto.randomBytes(20).toString("hex");
 
-  // hashing and adding to resetPasswordToken
+  // Hashing and adding resetPasswordToken to userSchema
   this.resetPasswordToken = crypto
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
 
-  this.resetPasswordExipre = Date.now() + 15 * 60 * 1000;
+  this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
   return resetToken;
 };
