@@ -128,6 +128,8 @@ const LoginSignUp = () => {
                 ref={switcherTab}
               ></button>
             </div>
+
+            {/* Login form */}
             <form
               className="flex flex-col justify-evenly items-center h-[80%] transition-transform duration-500 "
               ref={loginTab}
@@ -162,6 +164,7 @@ const LoginSignUp = () => {
               <Button label="Login" />
             </form>
 
+            {/* Register form */}
             <form
               className="signUpForm h-[80%] transition-transform duration-500 flex flex-col px-5 py-2  justify-evenly items-center "
               ref={registerTab}

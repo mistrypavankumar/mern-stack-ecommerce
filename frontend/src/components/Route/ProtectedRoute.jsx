@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import LoginSignUp from "../../pages/User/LoginSignUp";
 
 const ProtectedRoute = ({ path, element }) => {
-  const { isAuthenticated, loading, user } = useSelector((state) => state.user);
+  const { isAuthenticated, loading } = useSelector((state) => state.user);
   return (
     <>
       <Router>
