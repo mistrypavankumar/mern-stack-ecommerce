@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Navbar from "./components/layout/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/AboutUs";
@@ -17,8 +17,8 @@ import LoginSignUp from "./pages/User/LoginSignUp";
 import store from "./store";
 import { useSelector } from "react-redux";
 import { loadUser } from "./actions/userAction";
-import UserOptions from "./components/layout/Navbar/UserOptions";
 import Profile from "./pages/User/Profile";
+import UpdateProfile from "./pages/User/UpdateProfile";
 
 const menuOptions = [
   {
@@ -40,7 +40,7 @@ const menuOptions = [
 ];
 
 function App() {
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   useEffect(() => {
     WebFont.load({
@@ -69,7 +69,21 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/search" element={<SearchProducts />} />
-        {isAuthenticated && <Route path="/account" element={<Profile />} />}
+
+        {/* Protected routes starts */}
+
+        <Route
+          path="/update"
+          element={
+            isAuthenticated ? <UpdateProfile /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/account"
+          element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
+        />
+
+        {/* Protected routes ends */}
 
         <Route path="/login" element={<LoginSignUp />} />
 

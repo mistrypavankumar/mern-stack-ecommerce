@@ -20,9 +20,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
 
-  const { loading, error, products, productsCount } = useSelector(
-    (state) => state.products
-  );
+  const { loading, error, products } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (error) {

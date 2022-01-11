@@ -9,7 +9,7 @@ const Profile = () => {
   const { user, isAuthenticated, loading } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (isAuthenticated === false) {
+    if (!isAuthenticated) {
       navigate("/login", { replace: true });
     }
   }, [isAuthenticated, navigate]);
@@ -33,7 +33,7 @@ const Profile = () => {
               />
               <Link
                 className="profileLinkBtnStyle bg-secondaryDark"
-                to="/me/update"
+                to="/update"
               >
                 Edit Profile
               </Link>
