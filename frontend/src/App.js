@@ -96,7 +96,7 @@ function App() {
 
         <Route path="/login" element={<LoginSignUp />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
-        <Route path="/password/reset/" element={<ResetPassword />} />
+        <Route path="/password/reset/:token" element={<ResetPassword />} />
 
         {/* If router is not specified then show below page */}
         <Route path="/*" element={<PageNotFound />} />
