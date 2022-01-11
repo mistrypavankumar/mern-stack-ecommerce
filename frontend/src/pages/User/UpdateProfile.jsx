@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MdMailOutline, MdFace } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/user/Button";
 import InputField from "../../components/user/InputField";
 import Loader from "../../components/layout/Loader/Loader";
@@ -24,7 +24,7 @@ const UpdateProfile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const [avatar, setAvatar] = useState("/profile.png");
+  const [avatar, setAvatar] = useState();
   const [avatarPreview, setAvatarPreview] = useState("/profile.png");
 
   const updateProfileSubmit = (e) => {
@@ -35,26 +35,27 @@ const UpdateProfile = () => {
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("avatar", avatar);
-
     dispatch(updateProfile(myForm));
   };
 
   const updateProfileDataChange = (e) => {
-    if (e.target.name === "avatar") {
-      const reader = new FileReader();
+    const reader = new FileReader();
 
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatarPreview(reader.result);
-          setAvatar(reader.result);
-        }
-      };
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatarPreview(reader.result);
+        setAvatar(reader.result);
+      }
+    };
 
-      reader.readAsDataURL(e.target.files[0]);
-    }
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+
     // if user exists then set old name, email and avatar
     if (user) {
       setName(user.name);

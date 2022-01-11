@@ -5,7 +5,11 @@ import {
   productDetailsReducer,
   productReducer,
 } from "./reducers/productReducer";
-import { profileReducer, userReducer } from "./reducers/userReducer";
+import {
+  profileReducer,
+  userReducer,
+  forgotPasswordReducer,
+} from "./reducers/userReducer";
 
 // for multiple reducer
 const reducer = combineReducers({
@@ -13,6 +17,7 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   user: userReducer,
   profile: profileReducer,
+  forgotPassword: forgotPasswordReducer,
 });
 
 // initialstate
