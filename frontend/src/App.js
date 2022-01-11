@@ -19,6 +19,9 @@ import { useSelector } from "react-redux";
 import { loadUser } from "./actions/userAction";
 import Profile from "./pages/User/Profile";
 import UpdateProfile from "./pages/User/UpdateProfile";
+import UpdatePassword from "./pages/User/UpdatePassword";
+import ForgotPassword from "./pages/User/ForgotPassword";
+import ResetPassword from "./pages/User/ResetPassword";
 
 const menuOptions = [
   {
@@ -73,19 +76,27 @@ function App() {
         {/* Protected routes starts */}
 
         <Route
+          path="/account"
+          element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
+        />
+        <Route
           path="/update"
           element={
             isAuthenticated ? <UpdateProfile /> : <Navigate to="/login" />
           }
         />
         <Route
-          path="/account"
-          element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
+          path="/password/update"
+          element={
+            isAuthenticated ? <UpdatePassword /> : <Navigate to="/login" />
+          }
         />
 
         {/* Protected routes ends */}
 
         <Route path="/login" element={<LoginSignUp />} />
+        <Route path="/password/forgot" element={<ForgotPassword />} />
+        <Route path="/password/reset/" element={<ResetPassword />} />
 
         {/* If router is not specified then show below page */}
         <Route path="/*" element={<PageNotFound />} />

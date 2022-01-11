@@ -156,7 +156,7 @@ const LoginSignUp = () => {
               </div>
 
               <Link
-                to="/password/forget"
+                to="/password/forgot"
                 className="text-secondaryDark hover:text-primaryBlue transition-all duration-500"
               >
                 Forget Password ?
