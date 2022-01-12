@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getProduct } from "../actions/productAction";
-import Loader from "../components/layout/Loader/Loader";
-import ProductCard from "../components/home/OurProduct/ProductCard";
+import { clearErrors, getProduct } from "../../actions/productAction";
+import Loader from "../../components/layout/Loader/Loader";
+import ProductCard from "../../components/home/OurProduct/ProductCard";
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
-import FilterSlide from "../components/Products/FilterSlide";
-import MetaData from "../components/layout/MetaData";
+import FilterSlide from "../../components/Products/FilterSlide";
+import MetaData from "../../components/layout/MetaData";
 
 const categories = [
   "Laptop",

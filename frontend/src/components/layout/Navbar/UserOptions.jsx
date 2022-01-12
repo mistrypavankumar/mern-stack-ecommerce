@@ -6,8 +6,12 @@ import store from "./../../../store";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
 import { Backdrop } from "@material-ui/core";
+import { ShoppingCart } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 
 const UserOptions = ({ user }) => {
+  const { cartItems } = useSelector((state) => state.cart);
+
   const navigate = useNavigate();
   const alert = useAlert();
 
@@ -19,6 +23,10 @@ const UserOptions = ({ user }) => {
 
   const account = () => {
     navigate("/account");
+  };
+
+  const cart = () => {
+    navigate("/cart");
   };
 
   const orders = () => {
@@ -37,6 +45,17 @@ const UserOptions = ({ user }) => {
       name: "Profile",
       func: account,
     },
+
+    {
+      icon: (
+        <ShoppingCart
+          style={{ color: cartItems.length > 0 ? "#14cddb" : "unset" }}
+        />
+      ),
+      name: `Cart(${cartItems.length})`,
+      func: cart,
+    },
+
     {
       icon: <ListAlt />,
       name: "Orders",
@@ -83,6 +102,7 @@ const UserOptions = ({ user }) => {
               icon={option.icon}
               tooltipTitle={option.name}
               onClick={option.func}
+              tooltipOpen={window.innerWidth <= 600 ? true : false}
             />
           );
         })}

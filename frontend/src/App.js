@@ -3,15 +3,12 @@ import Navbar from "./components/layout/Navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
-import ProductDetails from "./pages/ProductDetails";
 import { useEffect } from "react";
 import WebFont from "webfontloader";
 import Footer from "./components/layout/Footer/Footer";
 import footerData from "./data/footerData.json";
 import "./App.css";
-import Products from "./pages/Products";
 import PageNotFound from "./pages/PageNotFound";
-import SearchProducts from "./pages/SearchProducts";
 import LoginSignUp from "./pages/User/LoginSignUp";
 
 import store from "./store";
@@ -22,6 +19,11 @@ import UpdateProfile from "./pages/User/UpdateProfile";
 import UpdatePassword from "./pages/User/UpdatePassword";
 import ForgotPassword from "./pages/User/ForgotPassword";
 import ResetPassword from "./pages/User/ResetPassword";
+
+import ProductDetails from "./pages/Product/ProductDetails";
+import Products from "./pages/Product/Products";
+import SearchProducts from "./pages/Product/SearchProducts";
+import Cart from "./pages/Cart/Cart";
 
 const menuOptions = [
   {
@@ -93,6 +95,8 @@ function App() {
         />
 
         {/* Protected routes ends */}
+
+        <Route path="/cart" element={<Cart />} />
 
         <Route path="/login" element={<LoginSignUp />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />

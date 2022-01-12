@@ -40,8 +40,10 @@ const FilterSlide = ({
         </div>
       )}
       <div
-        className={`w-full h-auto md:w-80 absolute left-0 top-32 shadow-xl border-r-2 py-5 rounded-r-lg px-5 z-20 transition-all duration-500 bg-primaryBlue  ${
-          toggleFilterSlider ? "animate-slide-in" : "-translate-x-96"
+        className={` w-full h-auto md:w-80 absolute left-0 top-32 shadow-xl border-r-2 py-5 rounded-r-lg px-5 z-20 transition-all duration-500 bg-primaryBlue  ${
+          toggleFilterSlider
+            ? "animate-slide-in block"
+            : "-translate-x-96 hidden"
         }`}
       >
         <div className="flex justify-between items-center">

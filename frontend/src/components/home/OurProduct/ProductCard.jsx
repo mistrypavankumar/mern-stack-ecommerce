@@ -29,7 +29,9 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="px-3 py-3 text-center">
-        <p className="text-secondaryDark font-bold text-md">{product.name}</p>
+        <p className="text-secondaryDark font-bold text-md capitalize">
+          {product.name}
+        </p>
 
         <span className="text-red-600 font-semibold">₹ {product.price}</span>
       </div>

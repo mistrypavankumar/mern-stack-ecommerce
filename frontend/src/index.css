@@ -29,7 +29,7 @@
   }
 
   .quantityBtn{
-    @apply outline-none px-4 py-1 text-white bg-secondaryDark opacity-75 hover:opacity-100 transition-opacity duration-300;
+    @apply outline-none px-3 md:px-4 py-1 text-white bg-secondaryDark opacity-75 hover:opacity-100 transition-opacity duration-300;
   }
 
   .commonBtnStyle{
