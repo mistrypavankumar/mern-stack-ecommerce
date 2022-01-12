@@ -10,6 +10,7 @@ import {
   userReducer,
   forgotPasswordReducer,
 } from "./reducers/userReducer";
+import { cartReducer } from "./reducers/cartReducer";
 
 // for multiple reducer
 const reducer = combineReducers({
@@ -18,10 +19,17 @@ const reducer = combineReducers({
   user: userReducer,
   profile: profileReducer,
   forgotPassword: forgotPasswordReducer,
+  cart: cartReducer,
 });
 
 // initialstate
-let initialState = {};
+let initialState = {
+  cart: {
+    cartItems: localStorage.getItem("cartItems")
+      ? JSON.parse(localStorage.getItem("cartItems"))
+      : [],
+  },
+};
 
 // middle ware
 const middleware = [thunk];

@@ -1,13 +1,15 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getProductDetails } from "../actions/productAction";
+import { clearErrors, getProductDetails } from "../../actions/productAction";
 import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
-import Loader from "../components/layout/Loader/Loader";
 import { useAlert } from "react-alert";
-import ReviewCard from "../components/home/ReviewCard/ReviewCard";
-import MetaData from "../components/layout/MetaData";
+import ReviewCard from "../../components/home/ReviewCard/ReviewCard";
+import MetaData from "../../components/layout/MetaData";
+import { addItemsToCart } from "../../actions/cartAction";
+import Loader from "../../components/layout/Loader/Loader";
+import QuantityCardInput from "../../components/Cart/QuantityCardInput";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -20,6 +22,8 @@ const ProductDetails = () => {
     (state) => state.productDetails
   );
 
+  const [quantity, setQuantity] = useState(1);
+
   const options = {
     edit: false,
     color: "rgba(20,20,20,0.1)",
@@ -29,8 +33,6 @@ const ProductDetails = () => {
     isHalf: true,
   };
 
-  console.log(id);
-
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -38,6 +40,21 @@ const ProductDetails = () => {
     }
     dispatch(getProductDetails(id));
   }, [dispatch, id, error, alert]);
+
+  const increaseQuantity = () => {
+    if (product.stock <= quantity) return;
+
+    setQuantity(quantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
+
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id, quantity));
+    alert.success("Item Added To Cart");
+  };
 
   return (
     <Fragment>
@@ -57,7 +74,7 @@ const ProductDetails = () => {
 
           <div className="md:p-10 md:w-1/2 ">
             <div>
-              <h2 className="text-primaryDarkBlue font-bold text-xl text-center mt-5 md:mt-0 md:text-left">
+              <h2 className="text-primaryDarkBlue font-bold text-xl text-center mt-5 md:mt-0 md:text-left capitalize">
                 {product.name}
               </h2>
               <p className="text-slate-400 font-light text-xm text-center md:text-left">
@@ -80,17 +97,16 @@ const ProductDetails = () => {
               <h1 className="text-2xl font-bold text-primaryDarkBlue text-center md:text-left">{`₹ ${product.price}`}</h1>
 
               <div className="flex gap-5 my-5 flex-col md:flex-row justify-center md:justify-start">
-                <div className="flex items-center justify-center md:justify-start">
-                  <button className="quantityBtn rounded-l-md">-</button>
-                  <input
-                    className="w-10 text-center p-1 outline-none"
-                    value="1"
-                    type="number"
-                  />
-                  <button className="quantityBtn rounded-r-md">+</button>
-                </div>
+                <QuantityCardInput
+                  quantity={quantity}
+                  increaseQuantity={increaseQuantity}
+                  decreaseQuantity={decreaseQuantity}
+                />
 
-                <button className="commonBtnStyle mx-auto md:mx-0 py-2 px-5 w-1/3 md:w-1/3 bg-primaryBlue">
+                <button
+                  onClick={addToCartHandler}
+                  className="commonBtnStyle mx-auto md:mx-0 py-2 px-5 w-1/3 md:w-1/3 bg-primaryBlue"
+                >
                   Add to Cart
                 </button>
               </div>

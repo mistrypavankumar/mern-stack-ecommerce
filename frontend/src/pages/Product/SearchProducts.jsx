@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import MetaData from "../components/layout/MetaData";
+import MetaData from "../../components/layout/MetaData";
 
 const SearchProducts = () => {
   const navigate = useNavigate();
