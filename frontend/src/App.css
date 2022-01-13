@@ -175,16 +175,16 @@ input.avatarChoose::file-selector-button:hover{
 
 .MuiStepConnector-root{
   height: 1px;
-  background-color: red;
+  background-color: #0e8f99;
 }
 
 .MuiStepLabel-iconContainer-active{
-  color: red !important;
+  color: #0e8f99 !important;
 }
 
 .MuiStepConnector-active,
 .MuiStepConnector-completed{
-  background-color: blue 
+  background-color: #0e8f99 
   ;
 }
 

@@ -2,6 +2,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        tall: { raw: "(min-width: 814px)" },
+      },
       width: {
         190: "190px",
         275: "275px",

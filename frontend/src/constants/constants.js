@@ -19,3 +19,6 @@ export const bannerBgColor = "#e7e7e7";
 
 export const mv_padding = "1rem";
 export const dv_padding = "5rem";
+
+// symbol
+export const rupeeSymbol = "₹";

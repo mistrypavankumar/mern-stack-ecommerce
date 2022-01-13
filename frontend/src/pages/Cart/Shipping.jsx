@@ -15,8 +15,10 @@ import InputField from "../../components/user/InputField";
 import Button from "../../components/user/Button";
 import CheckoutSteps from "../../components/shipping/CheckoutSteps";
 import { useAlert } from "react-alert";
+import { useNavigate } from "react-router-dom";
 
 const Shipping = () => {
+  const navgiate = useNavigate();
   const alert = useAlert();
   const dispatch = useDispatch();
   const { shippingInfo } = useSelector((state) => state.cart);
@@ -31,9 +33,22 @@ const Shipping = () => {
   const shippingSubmit = (e) => {
     e.preventDefault();
 
-    if (phoneNo.length < 10 || phoneNo > 10) {
+    if (phoneNo.length < 10 || phoneNo.length > 10) {
       alert.error("Phone number should be 10 digits");
+      return;
     }
+
+    dispatch(
+      saveShippingInfo({
+        address,
+        city,
+        pinCode,
+        state,
+        country,
+        phoneNo,
+      })
+    );
+    navgiate("/order/confirm");
   };
   return (
     <Fragment>
