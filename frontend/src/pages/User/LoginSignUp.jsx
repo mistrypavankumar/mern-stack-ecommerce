@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MdMailOutline, MdLockOpen, MdFace } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Button from "../../components/user/Button";
 import InputField from "../../components/user/InputField";
 import Loader from "../../components/layout/Loader/Loader";
@@ -12,6 +12,7 @@ import { useAlert } from "react-alert";
 const LoginSignUp = () => {
   // for navigation
   const navigate = useNavigate();
+  const location = useLocation();
 
   const dispatch = useDispatch();
   const { error, loading, isAuthenticated } = useSelector(
@@ -34,6 +35,8 @@ const LoginSignUp = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
 
+  const redirect = location.search ? location.search.split("=")[1] : "/account";
+
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -41,9 +44,9 @@ const LoginSignUp = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/account", { replace: true });
+      navigate(redirect, { replace: true });
     }
-  }, [error, alert, dispatch, isAuthenticated, navigate]);
+  }, [error, alert, dispatch, redirect, isAuthenticated, navigate]);
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {
@@ -183,7 +186,7 @@ const LoginSignUp = () => {
                   />
 
                   <InputField
-                    inputType="text"
+                    inputType="email"
                     name="email"
                     placeholder="Enter your email"
                     Icon={MdMailOutline}
