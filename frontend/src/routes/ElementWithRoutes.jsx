@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import AboutUs from "../pages/AboutUs";
@@ -16,9 +16,14 @@ import Profile from "../pages/User/Profile";
 import ResetPassword from "../pages/User/ResetPassword";
 import UpdatePassword from "../pages/User/UpdatePassword";
 import UpdateProfile from "../pages/User/UpdateProfile";
+import ConfrimOrder from "../pages/Cart/ConfirmOrder";
+import Payment from "../pages/Cart/Payment";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
-const ElementWithRoutes = () => {
+const ElementWithRoutes = ({ stripeApiKey }) => {
   const { isAuthenticated } = useSelector((state) => state.user);
+
   return (
     <>
       <Routes>
@@ -55,6 +60,28 @@ const ElementWithRoutes = () => {
           path="/shipping"
           element={isAuthenticated ? <Shipping /> : <Navigate to="/login" />}
         />
+
+        <Route
+          path="/order/confirm"
+          element={
+            isAuthenticated ? <ConfrimOrder /> : <Navigate to="/login" />
+          }
+        />
+
+        {stripeApiKey && (
+          <Route
+            path="/process/payment"
+            element={
+              isAuthenticated ? (
+                <Elements stripe={loadStripe(stripeApiKey)}>
+                  <Payment />
+                </Elements>
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        )}
 
         {/* Protected routes ends */}
 
