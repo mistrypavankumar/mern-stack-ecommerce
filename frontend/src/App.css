@@ -169,3 +169,23 @@ input.avatarChoose::file-selector-button:hover{
 }
 
 /* Cart page icons style end*/
+
+
+/* shipping checkoutsteps style starts */
+
+.MuiStepConnector-root{
+  height: 1px;
+  background-color: red;
+}
+
+.MuiStepLabel-iconContainer-active{
+  color: red !important;
+}
+
+.MuiStepConnector-active,
+.MuiStepConnector-completed{
+  background-color: blue 
+  ;
+}
+
+/* shipping checkoutsteps style ends */

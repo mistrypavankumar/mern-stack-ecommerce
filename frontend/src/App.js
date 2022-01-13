@@ -24,6 +24,7 @@ import ProductDetails from "./pages/Product/ProductDetails";
 import Products from "./pages/Product/Products";
 import SearchProducts from "./pages/Product/SearchProducts";
 import Cart from "./pages/Cart/Cart";
+import Shipping from "./pages/Cart/Shipping";
 
 const menuOptions = [
   {
@@ -92,6 +93,11 @@ function App() {
           element={
             isAuthenticated ? <UpdatePassword /> : <Navigate to="/login" />
           }
+        />
+
+        <Route
+          path="/shipping"
+          element={isAuthenticated ? <Shipping /> : <Navigate to="/login" />}
         />
 
         {/* Protected routes ends */}

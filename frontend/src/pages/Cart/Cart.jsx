@@ -3,10 +3,12 @@ import CartItemCard from "../../components/Cart/CartItemCard";
 import { useDispatch, useSelector } from "react-redux";
 import QuantityCardInput from "../../components/Cart/QuantityCardInput";
 import { addItemsToCart, removeItemsFromCart } from "../../actions/cartAction";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RemoveShoppingCart } from "@material-ui/icons";
 
 const Cart = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
 
@@ -29,6 +31,10 @@ const Cart = () => {
 
   const deleteItemsFromCart = (id) => {
     dispatch(removeItemsFromCart(id));
+  };
+
+  const checkoutHandler = () => {
+    navigate("/shipping");
   };
 
   return (
@@ -106,7 +112,10 @@ const Cart = () => {
               </div>
               <div></div>
               <div className="px-5 w-full md:w-1/2 lg:w-1/5">
-                <button className="bg-primaryBlue w-full hover:shadow-lg py-2 rounded-md text-white mt-10 transition-all duration-500 hover:scale-105">
+                <button
+                  onClick={checkoutHandler}
+                  className="bg-primaryBlue w-full hover:shadow-lg py-2 rounded-md text-white mt-10 transition-all duration-500 hover:scale-105"
+                >
                   Check Out
                 </button>
               </div>
