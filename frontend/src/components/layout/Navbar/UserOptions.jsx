@@ -30,7 +30,7 @@ const UserOptions = ({ user }) => {
   };
 
   const orders = () => {
-    navigate("/order");
+    navigate("/orders/me");
   };
 
   const logoutUser = () => {
