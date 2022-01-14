@@ -57,7 +57,7 @@ const Profile = () => {
               <div className="flex flex-col gap-y-5 w-full md:w-[60%]">
                 <Link
                   className="profileLinkBtnStyle bg-primaryBlue"
-                  to="/orders"
+                  to="/orders/me"
                 >
                   My Orders
                 </Link>

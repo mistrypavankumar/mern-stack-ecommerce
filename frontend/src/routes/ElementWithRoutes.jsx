@@ -20,6 +20,8 @@ import ConfrimOrder from "../pages/Cart/ConfirmOrder";
 import Payment from "../pages/Cart/Payment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import OrderSuccess from "../pages/Cart/OrderSuccess";
+import MyOrders from "../pages/Cart/MyOrders";
 
 const ElementWithRoutes = ({ stripeApiKey }) => {
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -82,6 +84,18 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
             }
           />
         )}
+
+        <Route
+          path="/success"
+          element={
+            isAuthenticated ? <OrderSuccess /> : <Navigate to="/login" />
+          }
+        />
+
+        <Route
+          path="/orders/me"
+          element={isAuthenticated ? <MyOrders /> : <Navigate to="/login" />}
+        />
 
         {/* Protected routes ends */}
 

@@ -2,7 +2,7 @@ const express = require("express");
 const {
   newOrder,
   getSingleOrder,
-  myOrder,
+  myOrders,
   getAllOrders,
   updateOrder,
   deleteOrder,
@@ -16,7 +16,7 @@ const {
 router.route("/order/new").post(isAuthenticatedUser, newOrder);
 router.route("/order/:id").get(isAuthenticatedUser, getSingleOrder);
 
-router.route("/orders/me").get(isAuthenticatedUser, myOrder);
+router.route("/orders/me").get(isAuthenticatedUser, myOrders);
 
 // admin routes
 router
