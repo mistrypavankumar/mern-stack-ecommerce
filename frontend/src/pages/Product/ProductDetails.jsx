@@ -104,6 +104,7 @@ const ProductDetails = () => {
                 />
 
                 <button
+                  disabled={product.stock < 1 ? true : false}
                   onClick={addToCartHandler}
                   className="commonBtnStyle mx-auto md:mx-0 py-2 px-5 w-1/3 md:w-1/3 bg-primaryBlue"
                 >

@@ -13,8 +13,6 @@ const MyOrders = () => {
   const dispatch = useDispatch();
   const { error, loading, orders } = useSelector((state) => state.myOrders);
 
-  console.log(orders);
-
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -34,6 +32,11 @@ const MyOrders = () => {
       headerName: "Status",
       minWidth: 150,
       flex: 0.5,
+      cellClassName: (params) => {
+        return params.getValue(params.id, "status") === "Delivered"
+          ? "text-green-500"
+          : "text-red-500";
+      },
     },
     {
       field: "itemsQty",
@@ -51,11 +54,22 @@ const MyOrders = () => {
       flex: 0.5,
     },
     {
-      field: "amount",
-      headerName: "Amount",
+      field: "actions",
+      headerName: "Actions",
       type: "number",
-      minWidth: 270,
-      flex: 0.5,
+      minWidth: 150,
+      flex: 0.3,
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <Link
+            className="text-slate-500 hover:text-red-500 transition-all duration-500"
+            to={`/order/${params.getValue(params.id, "id")}`}
+          >
+            <Launch />
+          </Link>
+        );
+      },
     },
   ];
 
@@ -78,7 +92,7 @@ const MyOrders = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="py-24">
+        <div className="py-24 w-[90%] mx-auto">
           <DataGrid
             rows={rows}
             columns={columns}
@@ -87,7 +101,12 @@ const MyOrders = () => {
             className=""
             autoHeight
           />
-          <p>{user.name}</p>
+          <p
+            className="bg-primaryBlue py-3
+          mt-10 text-center text-xl text-white rounded-md"
+          >
+            {user.name}'s Orders
+          </p>
         </div>
       )}
     </Fragment>
