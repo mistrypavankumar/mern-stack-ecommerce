@@ -22,6 +22,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "../pages/Cart/OrderSuccess";
 import MyOrders from "../pages/Cart/MyOrders";
+import OrderDetails from "../pages/Cart/OrderDetails";
 
 const ElementWithRoutes = ({ stripeApiKey }) => {
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -95,6 +96,13 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
         <Route
           path="/orders/me"
           element={isAuthenticated ? <MyOrders /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/order/:id"
+          element={
+            isAuthenticated ? <OrderDetails /> : <Navigate to="/login" />
+          }
         />
 
         {/* Protected routes ends */}

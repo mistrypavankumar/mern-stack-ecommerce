@@ -189,3 +189,27 @@ input.avatarChoose::file-selector-button:hover{
 }
 
 /* shipping checkoutsteps style ends */
+
+
+/* Myorder styles start */
+
+.MuiDataGrid-root{
+  color: rgba(0,0,0,0.623);
+  font-family: "Poppins", sans-serif;
+  box-shadow:
+  1.7px 1.2px 2.2px rgba(0, 0, 0, 0.02),
+  4.1px 2.9px 5.3px rgba(0, 0, 0, 0.028),
+  7.8px 5.4px 10px rgba(0, 0, 0, 0.035),
+  13.8px 9.6px 17.9px rgba(0, 0, 0, 0.042),
+  25.9px 18px 33.4px rgba(0, 0, 0, 0.05),
+  62px 43px 80px rgba(0, 0, 0, 0.07)
+;
+}
+
+.MuiDataGrid-columnsContainer{
+  background-color: #0e8f99;
+  color: #fff;
+
+}
+
+/* Myorder styles end */
