@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
+import { Rating } from "@material-ui/lab";
 
 const ProductCard = ({ product }) => {
   const options = {
-    edit: false,
-    color: "rgba(20,20,20,0.1)",
-    activeColor: "#14cddb",
-    size: window.innerWidth < 600 ? 20 : 25,
+    size: "large",
+    readOnly: true,
+    precision: 0.5,
     value: product.ratings,
-    isHalf: true,
   };
 
   return (
@@ -22,7 +20,7 @@ const ProductCard = ({ product }) => {
 
         {product.numOfReviews !== 0 && (
           <div className="absolute bottom-0 bg-primaryBlue/90 w-full opacity-0 group-hover:opacity-100 translate-y-1/2 group-hover:translate-y-0 transition-all duration-500 flex justify-center items-center flex-col py-2">
-            <ReactStars {...options} />{" "}
+            <Rating {...options} />{" "}
             <span className="text-white">({product.numOfReviews} reviews)</span>
           </div>
         )}

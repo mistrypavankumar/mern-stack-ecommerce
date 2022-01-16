@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ReactStars from "react-rating-stars-component";
-import profilePng from "./../../../assets/instragram-img/1.png";
+import profilePng from "../../../assets/profile.png";
+import { Rating } from "@material-ui/lab";
 
 const ReviewCard = ({ review }) => {
   const [isShowing, setIsShowing] = useState(false);
@@ -10,12 +10,10 @@ const ReviewCard = ({ review }) => {
   };
 
   const options = {
-    edit: false,
-    color: "rgba(20,20,20,0.1)",
-    activeColor: "#14cddb",
-    size: window.innerWidth < 600 ? 20 : 25,
+    size: "large",
+    readOnly: true,
+    precision: 0.5,
     value: review.rating,
-    isHalf: true,
   };
   return (
     <div
@@ -33,7 +31,7 @@ const ReviewCard = ({ review }) => {
           <p className="text-secondaryDark tracking-wide font-medium text-base antialiased">
             {review.name}
           </p>
-          <ReactStars {...options} />
+          <Rating {...options} />
         </div>
       </div>
       <div className="w-full">

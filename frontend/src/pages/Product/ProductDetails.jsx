@@ -7,7 +7,6 @@ import {
   newReview,
 } from "../../actions/productAction";
 import { useParams } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
 import { useAlert } from "react-alert";
 import ReviewCard from "../../components/home/ReviewCard/ReviewCard";
 import MetaData from "../../components/layout/MetaData";
@@ -45,12 +44,10 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
 
   const options = {
-    edit: false,
-    color: "rgba(20,20,20,0.1)",
-    activeColor: "#14cddb",
-    size: window.innerWidth < 600 ? 20 : 25,
+    size: "large",
     value: product.ratings,
-    isHalf: true,
+    readOnly: true,
+    precision: 0.5,
   };
 
   useEffect(() => {
@@ -133,7 +130,7 @@ const ProductDetails = () => {
               className="flex gap-3 my-5 
             justify-center md:justify-start items-center border-t-2 border-b-2 py-3 border-slate-300"
             >
-              <ReactStars {...options} />
+              <Rating {...options} />
               <span className="text-slate-500">
                 ({product.numOfReviews} Reviews)
               </span>

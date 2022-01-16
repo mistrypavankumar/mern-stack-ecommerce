@@ -82,6 +82,7 @@ const OrderDetails = () => {
                   <div className="flex gap-3">
                     <p>Amount: </p>
                     <span className="text-slate-600">
+                      {rupeeSymbol}
                       {order.totalPrice && order.totalPrice}
                     </span>
                   </div>

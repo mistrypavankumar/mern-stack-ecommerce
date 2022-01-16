@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import AboutUs from "../pages/AboutUs";
@@ -23,9 +23,10 @@ import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "../pages/Cart/OrderSuccess";
 import MyOrders from "../pages/Cart/MyOrders";
 import OrderDetails from "../pages/Cart/OrderDetails";
+import Dashboard from "../pages/admin/Dashboard";
 
 const ElementWithRoutes = ({ stripeApiKey }) => {
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated, user, loading } = useSelector((state) => state.user);
 
   return (
     <>
@@ -44,7 +45,13 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
 
         <Route
           path="/account"
-          element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
+          element={
+            isAuthenticated && loading === false ? (
+              <Profile />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
         <Route
           path="/update"
@@ -95,13 +102,30 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
 
         <Route
           path="/orders/me"
-          element={isAuthenticated ? <MyOrders /> : <Navigate to="/login" />}
+          element={
+            isAuthenticated && loading === false ? (
+              <MyOrders />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
 
         <Route
           path="/order/:id"
           element={
             isAuthenticated ? <OrderDetails /> : <Navigate to="/login" />
+          }
+        />
+
+        <Route
+          path="/admin/dashboard"
+          element={
+            isAuthenticated && user.role === "admin" ? (
+              <Dashboard />
+            ) : (
+              <Navigate to="/login" />
+            )
           }
         />
 
