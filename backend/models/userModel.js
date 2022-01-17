@@ -7,21 +7,21 @@ const crypto = require("crypto");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please Enter your name"],
-    maxlength: [30, "Name cannot exceed 30 characters"],
-    minlength: [4, "Name should have at least 4 characters"],
+    required: [true, "Please Enter Your Name"],
+    maxLength: [30, "Name cannot exceed 30 characters"],
+    minLength: [4, "Name should have more than 4 characters"],
   },
   email: {
     type: String,
-    required: [true, "Please Enter your email"],
+    required: [true, "Please Enter Your Email"],
     unique: true,
-    validate: [validator.isEmail, "Please Enter valid email"],
+    validate: [validator.isEmail, "Please Enter a valid Email"],
   },
   password: {
     type: String,
-    required: [true, "Please Enter your password"],
-    minlength: [8, "Password should be greater than 8 characters"],
-    select: false, // by this admin cannot see users password while searching
+    required: [true, "Please Enter Your Password"],
+    minLength: [8, "Password should be greater than 8 characters"],
+    select: false,
   },
   avatar: {
     public_id: {
@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema({
   },
 
   resetPasswordToken: String,
-  resetPasswordExipre: Date,
+  resetPasswordExpire: Date,
 });
 
 userSchema.pre("save", async function (next) {
@@ -66,8 +66,8 @@ userSchema.methods.getJWTToken = function () {
 };
 
 // compare password
-userSchema.methods.comparePassword = function (enteredPassword) {
-  return bcrypt.compare(enteredPassword, this.password);
+userSchema.methods.comparePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
 };
 
 // Generating Password Reset Token
