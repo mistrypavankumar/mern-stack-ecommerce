@@ -108,8 +108,8 @@ const ProductDetails = () => {
           <MetaData title={`${product.name} | E-Commerce`} />
           <div className="w-full flex justify-center md:w-1/2 md:p-10 overflow-hidden ">
             <Carousel className="w-full md:w-3/5">
-              {product.image &&
-                product.image.map((item, id) => {
+              {product.images &&
+                product.images.map((item, id) => {
                   return <img key={id} src={item.url} alt={`${id} Slide`} />;
                 })}
             </Carousel>

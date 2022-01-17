@@ -6,12 +6,27 @@ import { Doughnut, Line } from "react-chartjs-2";
 import Sidebar from "../../components/admin/Sidebar";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
+import { getAdminProducts } from "../../actions/productAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { products } = useSelector((state) => state.products);
   const { isAuthenticated } = useSelector((state) => state.user);
+
+  let outOfStock = 0;
+
+  products &&
+    products.forEach((item) => {
+      if (item.stock === 0) {
+        outOfStock += 1;
+      }
+    });
+
+  useEffect(() => {
+    dispatch(getAdminProducts());
+  }, [dispatch]);
 
   Chart.register(CategoryScale);
 
@@ -33,7 +48,7 @@ const Dashboard = () => {
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [5, products.length - 2],
+        data: [outOfStock, products.length - outOfStock],
       },
     ],
   };
@@ -45,15 +60,15 @@ const Dashboard = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="h-auto w-full absolute z-10 bg-gray-50  tall:grid grid-cols-5">
+    <div className="dashboardStyle">
       <MetaData title="Dashboard - Admin Panel" />
-      <div className="col-span-1 border-r-2">
+      <div className="sidebarStyle">
         <Sidebar />
       </div>
 
-      <div className="col-span-4 h-auto w-full py-24">
+      <div className="dashboardRightBoxStyle">
         <div>
-          <p className="text-center text-2xl font-bold text-gray-400">
+          <p className="upper text-center text-2xl font-bold text-gray-400">
             Dashboard
           </p>
         </div>
