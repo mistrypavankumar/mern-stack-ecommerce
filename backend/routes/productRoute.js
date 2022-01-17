@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getAllProducts,
+  getAdminProducts,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -16,6 +17,9 @@ const {
 } = require("./../middleware/auth");
 
 router.route("/products").get(getAllProducts);
+router
+  .route("/admin/products")
+  .get(isAuthenticatedUser, authorizedRoles("admin"), getAdminProducts);
 
 router
   .route("/admin/product/new")
