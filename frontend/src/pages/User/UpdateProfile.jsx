@@ -47,15 +47,10 @@ const UpdateProfile = () => {
         setAvatar(reader.result);
       }
     };
-
     reader.readAsDataURL(e.target.files[0]);
   };
 
   useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-
     // if user exists then set old name, email and avatar
     if (user) {
       setName(user.name);
@@ -69,7 +64,7 @@ const UpdateProfile = () => {
     }
 
     if (isUpdated) {
-      alert.success("Profile updated successfully");
+      alert.success("Profile Updated Successfully");
       dispatch(loadUser());
 
       navigate("/account", { replace: true });
@@ -123,7 +118,7 @@ const UpdateProfile = () => {
                       alt="avatar preview"
                     />
                     <input
-                      className="avatarChoose border-2 rounded-lg "
+                      className="avatarChoose border-2 rounded-lg w-full "
                       type="file"
                       name="avatar"
                       accept="image/*"

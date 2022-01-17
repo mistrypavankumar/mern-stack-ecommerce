@@ -1,23 +1,17 @@
 import React from "react";
-import { Navigate, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Outlet, Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({
-  element: Element,
-  path,
-  isAuthenticated,
-  userRole,
-  ...rest
-}) => {
+const ProtectedRoute = () => {
+  const { isAuthenticated, loading } = useSelector((state) => state.user);
   return (
-    <React.Fragment>
-      <Routes
-        {...rest}
-        path={path}
-        element={
-          isAuthenticated && userRole === "admin" ? <Element /> : <Navigate />
-        }
-      />
-    </React.Fragment>
+    <>
+      {loading === false && (
+        <>
+          {isAuthenticated === false ? <Navigate to="/login" /> : <Outlet />}{" "}
+        </>
+      )}
+    </>
   );
 };
 

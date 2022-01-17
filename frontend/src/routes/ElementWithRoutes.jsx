@@ -1,6 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AboutUs from "../pages/AboutUs";
 import Cart from "../pages/Cart/Cart";
 import Shipping from "../pages/Cart/Shipping";
@@ -24,10 +23,10 @@ import OrderSuccess from "../pages/Cart/OrderSuccess";
 import MyOrders from "../pages/Cart/MyOrders";
 import OrderDetails from "../pages/Cart/OrderDetails";
 import Dashboard from "../pages/admin/Dashboard";
+import ProtectedRoute from "./ProtectedRoute";
+import AdminProtectedRoute from "./AdminProtectedRoute";
 
 const ElementWithRoutes = ({ stripeApiKey }) => {
-  const { isAuthenticated, user, loading } = useSelector((state) => state.user);
-
   return (
     <>
       <Routes>
@@ -43,91 +42,34 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
 
         {/* Protected routes starts */}
 
-        <Route
-          path="/account"
-          element={
-            isAuthenticated && loading === false ? (
-              <Profile />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route
-          path="/update"
-          element={
-            isAuthenticated ? <UpdateProfile /> : <Navigate to="/login" />
-          }
-        />
-        <Route
-          path="/password/update"
-          element={
-            isAuthenticated ? <UpdatePassword /> : <Navigate to="/login" />
-          }
-        />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/account" element={<Profile />} />
+          <Route path="/update" element={<UpdateProfile />} />
+          <Route path="/password/update" element={<UpdatePassword />} />
 
-        <Route
-          path="/shipping"
-          element={isAuthenticated ? <Shipping /> : <Navigate to="/login" />}
-        />
+          <Route path="/shipping" element={<Shipping />} />
 
-        <Route
-          path="/order/confirm"
-          element={
-            isAuthenticated ? <ConfrimOrder /> : <Navigate to="/login" />
-          }
-        />
+          <Route path="/order/confirm" element={<ConfrimOrder />} />
 
-        {stripeApiKey && (
-          <Route
-            path="/process/payment"
-            element={
-              isAuthenticated ? (
+          {stripeApiKey && (
+            <Route
+              path="/process/payment"
+              element={
                 <Elements stripe={loadStripe(stripeApiKey)}>
                   <Payment />
                 </Elements>
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-        )}
+              }
+            />
+          )}
 
-        <Route
-          path="/success"
-          element={
-            isAuthenticated ? <OrderSuccess /> : <Navigate to="/login" />
-          }
-        />
+          <Route path="/success" element={<OrderSuccess />} />
+          <Route path="/orders/me" element={<MyOrders />} />
+          <Route path="/order/:id" element={<OrderDetails />} />
 
-        <Route
-          path="/orders/me"
-          element={
-            isAuthenticated && loading === false ? (
-              <MyOrders />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-
-        <Route
-          path="/order/:id"
-          element={
-            isAuthenticated ? <OrderDetails /> : <Navigate to="/login" />
-          }
-        />
-
-        <Route
-          path="/admin/dashboard"
-          element={
-            isAuthenticated && user.role === "admin" ? (
-              <Dashboard />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
+          <Route element={<AdminProtectedRoute />}>
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+          </Route>
+        </Route>
 
         {/* Protected routes ends */}
 
@@ -138,7 +80,7 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
         <Route path="/password/reset/:token" element={<ResetPassword />} />
 
         {/* If router is not specified then show below page */}
-        <Route path="/*" element={<PageNotFound />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );
