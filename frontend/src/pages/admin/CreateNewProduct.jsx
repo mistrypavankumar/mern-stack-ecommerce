@@ -21,7 +21,7 @@ const CreateNewProduct = () => {
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const { loading, error, success } = useSelector((state) => state.newProduct);
+  const { error, success, loading } = useSelector((state) => state.newProduct);
 
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState(0);
@@ -192,7 +192,7 @@ const CreateNewProduct = () => {
               </div>
             </div>
             <div className="w-fit mx-auto">
-              <Button label="Create" />{" "}
+              <Button disabled={loading ? true : false} label="Create" />{" "}
             </div>
           </form>
         </div>

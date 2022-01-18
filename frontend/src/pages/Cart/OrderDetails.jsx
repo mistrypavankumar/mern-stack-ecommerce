@@ -89,7 +89,7 @@ const OrderDetails = () => {
                 <p className="heading">Order Status</p>
                 <div className="headingData">
                   <div className="flex gap-3">
-                    <p>
+                    <p className="flex gap-3">
                       Order:{" "}
                       <p
                         className={`${
@@ -113,7 +113,7 @@ const OrderDetails = () => {
                       return (
                         <div
                           key={index}
-                          className="flex px-5 md:px-10 gap-x-7 mt-3 items-center"
+                          className="flex gap-x-7 mt-3 items-center"
                         >
                           <img
                             className="w-[10vmax] md:w-[5vmax]"

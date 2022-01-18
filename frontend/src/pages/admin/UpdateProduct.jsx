@@ -254,7 +254,7 @@ const UpdateProduct = () => {
               </div>
             </div>
             <div className="w-fit mx-auto">
-              <Button label="Create" />{" "}
+              <Button disabled={loading ? true : false} label="Create" />{" "}
             </div>
           </form>
         </div>
