@@ -1,6 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, createProduct } from "../../actions/productAction";
+import {
+  clearErrors,
+  getProductDetails,
+  updateProduct,
+} from "../../actions/productAction";
 import { useAlert } from "react-alert";
 import Button from "../../components/user/Button";
 import MetaData from "../../components/layout/MetaData";
@@ -12,16 +16,24 @@ import {
   AttachMoney,
 } from "@material-ui/icons";
 import SideBar from "../../components/admin/Sidebar";
-import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
+import { UPDATE_PRODUCT_RESET } from "../../constants/productConstants";
 import InputField from "../../components/user/InputField";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-const CreateNewProduct = () => {
+const UpdateProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
+  const params = useParams();
 
-  const { loading, error, success } = useSelector((state) => state.newProduct);
+  const { error, product } = useSelector((state) => state.productDetails);
+  const productId = params.id;
+
+  const {
+    error: updateError,
+    loading,
+    isUpdated,
+  } = useSelector((state) => state.product);
 
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState(0);
@@ -29,6 +41,7 @@ const CreateNewProduct = () => {
   const [category, setCategory] = useState("");
   const [Stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
+  const [oldImages, setOldImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
@@ -42,20 +55,45 @@ const CreateNewProduct = () => {
   ];
 
   useEffect(() => {
+    if (product && product._id !== productId) {
+      dispatch(getProductDetails(productId));
+    } else {
+      setProductName(product.name);
+      setDescription(product.description);
+      setPrice(product.price);
+      setCategory(product.category);
+      setStock(product.stock);
+      setOldImages(product.images);
+    }
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
 
-    if (success) {
-      alert.success("Product Created Successfully");
-      navigate("/admin/dashboard");
-
-      dispatch({ type: NEW_PRODUCT_RESET });
+    if (updateError) {
+      alert.error(updateError);
+      dispatch(clearErrors());
     }
-  }, [alert, dispatch, error, navigate, success]);
 
-  const createProductSubmitHandler = (e) => {
+    if (isUpdated) {
+      alert.success("Product is Updated Successfully");
+      navigate("/admin/products");
+
+      dispatch({ type: UPDATE_PRODUCT_RESET });
+    }
+  }, [
+    alert,
+    dispatch,
+    updateError,
+    navigate,
+    isUpdated,
+    error,
+    productId,
+    product,
+  ]);
+
+  const updateProductSubmitHandler = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
@@ -70,14 +108,15 @@ const CreateNewProduct = () => {
       myForm.append("images", image);
     });
 
-    dispatch(createProduct(myForm));
+    dispatch(updateProduct(productId, myForm));
   };
 
-  const createProductImagesChange = (e) => {
+  const updateProductImagesChange = (e) => {
     const files = Array.from(e.target.files);
 
     setImages([]);
     setImagesPreview([]);
+    setOldImages([]);
 
     files.forEach((file) => {
       const reader = new FileReader();
@@ -106,14 +145,14 @@ const CreateNewProduct = () => {
         <div className="dashboardRightBoxStyle">
           <div className="mb-5">
             <p className="upper text-center text-2xl font-bold text-gray-400">
-              CREATE PRODUCT
+              UPDATE PRODUCT
             </p>
           </div>
 
           <form
             className="w-[90%]  md:w-[50%] mx-auto shadow-lg bg-white p-10 rounded-md"
             encType="multipart/form-data"
-            onSubmit={createProductSubmitHandler}
+            onSubmit={updateProductSubmitHandler}
           >
             <div className="w-full mb-2">
               <div className="flex gap-2 justify-evenly flex-col h-full ">
@@ -148,6 +187,7 @@ const CreateNewProduct = () => {
                 <div className="bg-primaryBlue rounded-lg overflow-hidden w-full flex justify-start items-center">
                   <AccountTree className="text-xl text-white mx-2" />
                   <select
+                    value={category}
                     className="px-3 py-2 outline-none border-2 w-full"
                     onChange={(e) => setCategory(e.target.value)}
                   >
@@ -176,14 +216,36 @@ const CreateNewProduct = () => {
                     name="avatar"
                     accept="image/*"
                     multiple
-                    onChange={createProductImagesChange}
+                    onChange={updateProductImagesChange}
                   />
+                </div>
+                <div className="text-center">
+                  <p className="font-medium text-gray-400 mt-5">
+                    Previous Images
+                  </p>
+                </div>
+                <div className="w-full flex justify-center items-center my-5 gap-5 overflow-auto ">
+                  {oldImages &&
+                    oldImages.map((image, index) => (
+                      <img
+                        key={index}
+                        className="shadow-lg w-[10vmax] h-[10vmax] tall:w-[5vmax] tall:h-[5vmax]"
+                        src={image.url}
+                        alt="Product Preview"
+                      />
+                    ))}
+                </div>
+
+                <div className="text-center">
+                  <p className="font-medium text-gray-400 mt-5">
+                    Updated Images
+                  </p>
                 </div>
                 <div className="w-full flex justify-center items-center my-5 gap-5 overflow-auto ">
                   {imagesPreview.map((image, index) => (
                     <img
                       key={index}
-                      className="w-[10vmax] h-[10vmax] tall:w-[5vmax] tall:h-[5vmax]"
+                      className="shadow-lg w-[10vmax] h-[10vmax] tall:w-[5vmax] tall:h-[5vmax]"
                       src={image}
                       alt="Product Preview"
                     />
@@ -201,4 +263,4 @@ const CreateNewProduct = () => {
   );
 };
 
-export default CreateNewProduct;
+export default UpdateProduct;

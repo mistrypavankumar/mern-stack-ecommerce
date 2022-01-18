@@ -2,26 +2,24 @@ import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  deleteOrder,
+  getAllOrders,
   clearErrors,
-  getAdminProducts,
-  deleteProduct,
-} from "../../actions/productAction";
+} from "../../actions/orderAction";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import MetaData from "../../components/layout/MetaData";
 import { Edit, Delete } from "@material-ui/icons";
 import SideBar from "../../components/admin/Sidebar";
-import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
+import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
-const ProductList = () => {
+const OrdersList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const { error, products } = useSelector((state) => state.products);
-  const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.product
-  );
+  const { error, orders } = useSelector((state) => state.allOrders);
+  const { error: deleteError, isDeleted } = useSelector((state) => state.order);
 
   useEffect(() => {
     if (error) {
@@ -35,38 +33,43 @@ const ProductList = () => {
     }
 
     if (isDeleted) {
-      alert.success("Product is Deleted Successfully");
-      navigate("/admin/dashboard");
-      dispatch({ type: DELETE_PRODUCT_RESET });
+      alert.success("Order is Deleted Successfully");
+      navigate("/admin/orders");
+      dispatch({ type: DELETE_ORDER_RESET });
     }
 
-    dispatch(getAdminProducts()); // getting all the user products
+    dispatch(getAllOrders()); // getting all the orders
   }, [dispatch, error, alert, deleteError, isDeleted, navigate]);
 
-  const deleteProductHandler = (id) => {
-    dispatch(deleteProduct(id));
+  const deleteOrderHandler = (id) => {
+    dispatch(deleteOrder(id));
   };
 
   const columns = [
-    { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
+    { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
 
     {
-      field: "name",
-      headerName: "Name",
-      minWidth: 350,
-      flex: 1,
+      field: "status",
+      headerName: "Status",
+      minWidth: 150,
+      flex: 0.5,
+      cellClassName: (params) => {
+        return params.getValue(params.id, "status") === "Delivered"
+          ? "text-green-500"
+          : "text-red-500";
+      },
     },
     {
-      field: "stock",
-      headerName: "Stock",
+      field: "itemsQty",
+      headerName: "Items Qty",
       type: "number",
       minWidth: 150,
       flex: 0.3,
     },
 
     {
-      field: "price",
-      headerName: "Price",
+      field: "amount",
+      headerName: "Amount",
       type: "number",
       minWidth: 270,
       flex: 0.5,
@@ -84,7 +87,7 @@ const ProductList = () => {
           <Fragment>
             <Link
               className="text-green-400 hover:text-green-500 transition-all duration-300"
-              to={`/admin/product/${params.getValue(params.id, "id")}`}
+              to={`/admin/order/${params.getValue(params.id, "id")}`}
             >
               <Edit />
             </Link>
@@ -92,7 +95,7 @@ const ProductList = () => {
             <button
               className="text-red-400 mx-7 hover:text-red-500 transition-all duration-300"
               onClick={() =>
-                deleteProductHandler(params.getValue(params.id, "id"))
+                deleteOrderHandler(params.getValue(params.id, "id"))
               }
             >
               <Delete />
@@ -105,19 +108,19 @@ const ProductList = () => {
 
   const rows = [];
 
-  products &&
-    products.forEach((item) => {
+  orders &&
+    orders.forEach((order) => {
       rows.push({
-        id: item._id,
-        stock: item.stock,
-        price: item.price,
-        name: item.name,
+        id: order._id,
+        itemsQty: order.orderItems.length,
+        status: order.orderStatus,
+        amount: order.totalPrice,
       });
     });
 
   return (
     <Fragment>
-      <MetaData title={`All Products - Admin`} />
+      <MetaData title={`All Orders - Admin`} />
 
       {/* dashboard */}
       <div className="dashboardStyle">
@@ -128,7 +131,7 @@ const ProductList = () => {
         <div className="dashboardRightBoxStyle">
           <div className="mb-5">
             <p className="upper text-center text-2xl font-bold text-gray-400">
-              ALL PRODUCTS
+              ALL ORDERS
             </p>
           </div>
 
@@ -145,5 +148,4 @@ const ProductList = () => {
     </Fragment>
   );
 };
-
-export default ProductList;
+export default OrdersList;
