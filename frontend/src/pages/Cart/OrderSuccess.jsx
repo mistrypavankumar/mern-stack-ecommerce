@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const OrderSuccess = () => {
   return (
-    <div className="h-screen  bg-primaryBlue">
+    <div className="h-full w-full bg-primaryBlue">
       <div className="w-[90%] h-screen mx-auto flex flex-col justify-center items-center gap-5">
         <CheckCircle
           style={{ fontSize: "5rem" }}

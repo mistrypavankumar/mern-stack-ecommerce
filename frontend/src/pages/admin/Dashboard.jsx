@@ -7,6 +7,9 @@ import Sidebar from "../../components/admin/Sidebar";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { getAdminProducts } from "../../actions/productAction";
+import { getAllOrders } from "../../actions/orderAction";
+import { getAllUsers } from "../../actions/userAction";
+import { rupeeSymbol } from "../../constants/constants";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -14,6 +17,8 @@ const Dashboard = () => {
 
   const { products } = useSelector((state) => state.products);
   const { isAuthenticated } = useSelector((state) => state.user);
+  const { orders } = useSelector((state) => state.allOrders);
+  const { users } = useSelector((state) => state.allUsers);
 
   let outOfStock = 0;
 
@@ -26,7 +31,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getAdminProducts());
+    dispatch(getAllOrders());
+    dispatch(getAllUsers());
   }, [dispatch]);
+
+  let totalAmount = 0;
+  orders &&
+    orders.forEach((item) => {
+      totalAmount += item.totalPrice;
+    });
 
   Chart.register(CategoryScale);
 
@@ -37,7 +50,7 @@ const Dashboard = () => {
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [0, 4000],
+        data: [0, totalAmount],
       },
     ],
   };
@@ -77,7 +90,8 @@ const Dashboard = () => {
         <div className="pt-10">
           <div className="text-center text-xl py-5 text-white font-medium bg-secondaryDark">
             <p>
-              Total Amount <br /> {/*₹{totalAmount} */}
+              Total Amount <br /> {rupeeSymbol}
+              {totalAmount}
             </p>
           </div>
 
@@ -95,11 +109,11 @@ const Dashboard = () => {
               to="/admin/orders"
             >
               <p>Orders</p>
-              {/* <p>{orders && orders.length}</p> */}
+              <p>{orders && orders.length}</p>
             </Link>
             <Link className="summryBoxStyle bg-gray-800" to="/admin/users">
               <p>Users</p>
-              {/* <p>{users && users.length}</p> */}
+              <p>{users && users.length}</p>
             </Link>
           </div>
         </div>

@@ -52,6 +52,9 @@ function App() {
     getStripeApiKey();
   }, [dispatch]);
 
+  // make user not to inspect the page
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
+
   return (
     <>
       {/* Navbar component */}

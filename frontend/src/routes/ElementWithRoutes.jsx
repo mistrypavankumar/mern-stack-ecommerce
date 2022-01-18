@@ -30,6 +30,9 @@ import CreateNewProduct from "../pages/admin/CreateNewProduct";
 import UpdateProduct from "../pages/admin/UpdateProduct";
 import OrdersList from "../pages/admin/OrdersList";
 import ProcessOrder from "../pages/admin/ProcessOrder";
+import UserList from "../pages/admin/UserList";
+import UpdateUser from "../pages/admin/UpdateUser";
+import ProductReviews from "../pages/admin/ProductReviews";
 
 const ElementWithRoutes = ({ stripeApiKey }) => {
   return (
@@ -78,6 +81,9 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
             <Route path="/admin/product/:id" element={<UpdateProduct />} />
             <Route path="/admin/orders" element={<OrdersList />} />
             <Route path="/admin/order/:id" element={<ProcessOrder />} />
+            <Route path="/admin/users" element={<UserList />} />
+            <Route path="/admin/user/:id" element={<UpdateUser />} />
+            <Route path="/admin/reviews" element={<ProductReviews />} />
           </Route>
         </Route>
 

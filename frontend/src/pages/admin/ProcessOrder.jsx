@@ -21,7 +21,11 @@ const ProcessOrder = () => {
   const params = useParams();
 
   const { order, error, loading } = useSelector((state) => state.orderDetails);
-  const { error: updateError, isUpdated } = useSelector((state) => state.order);
+  const {
+    error: updateError,
+    isUpdated,
+    loading: loadingOrder,
+  } = useSelector((state) => state.order);
   const [status, setStatus] = useState("");
 
   const udpateProcessOrder = (e) => {
@@ -187,42 +191,48 @@ const ProcessOrder = () => {
                 </div>
 
                 {/*  */}
-                <div className="tall:pl-8 py-5  mt-3 md:mt-0 col-span-6 tall:col-span-2">
-                  <form
-                    className="w-[100%] h-[60vh] flex flex-col gap-6 justify-center items-center mx-auto shadow-lg bg-white p-10 rounded-md"
-                    onSubmit={udpateProcessOrder}
-                  >
-                    <div className="text-center mb-10">
-                      <p className="text-xl font-medium text-gray-600 pb-3 border-b-2">
-                        Process Order
-                      </p>
-                    </div>
-                    <div className="w-full mb-2">
-                      <div className="flex gap-2 justify-evenly flex-col h-full ">
-                        <div className="bg-primaryBlue rounded-lg overflow-hidden w-full flex justify-start items-center">
-                          <AccountTree className="text-xl text-white mx-2" />
-                          <select
-                            value={status}
-                            className="px-3 py-2 outline-none border-2 w-full"
-                            onChange={(e) => setStatus(e.target.value)}
-                          >
-                            <option value="">Choose Status</option>
-                            <option value="Shipped">Shipped</option>
-                            <option value="Delivered">Delivered</option>
-                          </select>
+                {order.orderStatus !== "Delivered" && (
+                  <div className="tall:pl-8 py-5  mt-3 md:mt-0 col-span-6 tall:col-span-2">
+                    <form
+                      className="w-[100%] h-[60vh] flex flex-col gap-6 justify-center items-center mx-auto shadow-lg bg-white p-5 rounded-md"
+                      onSubmit={udpateProcessOrder}
+                    >
+                      <div className="text-center mb-10">
+                        <p className="text-xl font-medium text-gray-600 pb-3 border-b-2">
+                          Process Order
+                        </p>
+                      </div>
+                      <div className="w-full mb-2">
+                        <div className="flex gap-2 justify-evenly flex-col h-full ">
+                          <div className="bg-primaryBlue rounded-lg overflow-hidden w-full flex justify-start items-center">
+                            <AccountTree className="text-xl text-white mx-2" />
+                            <select
+                              value={status}
+                              className="px-3 py-2 outline-none border-2 w-full"
+                              onChange={(e) => setStatus(e.target.value)}
+                            >
+                              <option value="">Choose Status</option>
+                              <option value="Shipped">Shipped</option>
+                              <option value="Delivered">Delivered</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="w-fit mx-auto">
-                      <Button
-                        label="Process"
-                        disabled={
-                          loading ? true : false || status === "" ? true : false
-                        }
-                      />{" "}
-                    </div>
-                  </form>
-                </div>
+                      <div className="w-fit mx-auto">
+                        <Button
+                          label="Process"
+                          disabled={
+                            loadingOrder
+                              ? true
+                              : false || status === ""
+                              ? true
+                              : false
+                          }
+                        />{" "}
+                      </div>
+                    </form>
+                  </div>
+                )}
               </div>
             </div>
           </div>
