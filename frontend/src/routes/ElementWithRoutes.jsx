@@ -27,6 +27,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import ProductList from "../pages/admin/ProductList";
 import CreateNewProduct from "../pages/admin/CreateNewProduct";
+import UpdateProduct from "../pages/admin/UpdateProduct";
+import OrdersList from "../pages/admin/OrdersList";
+import ProcessOrder from "../pages/admin/ProcessOrder";
 
 const ElementWithRoutes = ({ stripeApiKey }) => {
   return (
@@ -72,6 +75,9 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
             <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/admin/products" element={<ProductList />} />
             <Route path="/admin/product" element={<CreateNewProduct />} />
+            <Route path="/admin/product/:id" element={<UpdateProduct />} />
+            <Route path="/admin/orders" element={<OrdersList />} />
+            <Route path="/admin/order/:id" element={<ProcessOrder />} />
           </Route>
         </Route>
 

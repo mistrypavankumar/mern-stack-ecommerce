@@ -32,28 +32,25 @@ const OrderDetails = () => {
           <div className="h-auto py-24">
             <div className="w-[90%] mx-auto">
               <div>
-                <p className="text-xl md:text-3xl text-secondaryDark mb-5">
-                  Order #{order && order._id}
-                </p>
                 <p className="heading">Shipping Info</p>
               </div>
               <div className="headingData">
                 <div className="flex gap-3 ">
                   <p>Name: </p>
                   <span className="text-slate-600">
-                    {order.shippingInfo && order.user.name}
+                    {order.user && order.user.name}
                   </span>
                 </div>
                 <div className="flex gap-3 ">
                   <p>Phone: </p>
                   <span className="text-slate-600">
-                    {order.shippingInfo && order.shippingInfo.phoneNo}
+                    {order.user && order.shippingInfo.phoneNo}
                   </span>
                 </div>
                 <div className="flex gap-3 ">
                   <p>Address: </p>
                   <span className="text-slate-600">
-                    {order.shippingInfo &&
+                    {order.user &&
                       `${order.shippingInfo.address}, ${order.shippingInfo.city}, ${order.shippingInfo.state} - ${order.shippingInfo.pinCode}, ${order.shippingInfo.country}`}
                   </span>
                 </div>
