@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Carousel from "react-material-ui-carousel";
+// import Carousel from "react-material-ui-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
@@ -22,6 +22,7 @@ import {
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
+import MgSlider from "../../components/Products/MgSlider";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -99,6 +100,8 @@ const ProductDetails = () => {
     setOpen(false);
   };
 
+  // console.log(product);
+
   return (
     <Fragment>
       {loading ? (
@@ -107,12 +110,14 @@ const ProductDetails = () => {
         <div className="w-full py-24 px-8 md:px-24 flex flex-col md:flex-row justify-center bg-secColor">
           <MetaData title={`${product.name} | E-Commerce`} />
           <div className="w-full flex justify-center md:w-1/2 md:p-10 overflow-hidden ">
-            <Carousel className="w-full md:w-3/5">
+            {/* <Carousel className="w-full md:w-3/5">
               {product.images &&
                 product.images.map((item, id) => {
                   return <img key={id} src={item.url} alt={`${id} Slide`} />;
                 })}
-            </Carousel>
+            </Carousel> */}
+
+            <MgSlider slides={product.images && product.images} />
           </div>
 
           <div className="md:p-10 md:w-1/2 ">
