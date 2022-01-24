@@ -49,7 +49,7 @@ function App() {
     store.dispatch(loadUser());
 
     getStripeApiKey();
-  }, []);
+  }, [stripeApikey]);
 
   // make user not to inspect the page
   // window.addEventListener("contextmenu", (e) => e.preventDefault());

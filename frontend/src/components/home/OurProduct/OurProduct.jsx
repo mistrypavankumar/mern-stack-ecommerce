@@ -2,8 +2,6 @@ import React from "react";
 import ProductCard from "./ProductCard";
 
 const OurProduct = ({ products }) => {
-  console.log(products);
-
   return (
     <div className="w-[100%] h-auto py-14" id="ourproduct">
       <div className="">
