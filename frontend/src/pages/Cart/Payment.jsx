@@ -17,6 +17,7 @@ import { createOrder, clearErrors } from "../../actions/orderAction";
 
 const Payment = () => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const payBtn = useRef(null);
@@ -44,6 +45,7 @@ const Payment = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     payBtn.current.disable = true;
 
@@ -94,6 +96,8 @@ const Payment = () => {
 
           dispatch(createOrder(order));
           navigate("/success", { replace: true });
+
+          setLoading(false);
         } else {
           alert.error("There's some issue while processing payment");
         }
@@ -142,7 +146,12 @@ const Payment = () => {
               className="slideableBtnStyles cursor-pointer"
               ref={payBtn}
               type="submit"
-              value={`Pay - ${orderInfo && orderInfo.totalPrice}`}
+              disabled={loading ? true : false}
+              value={
+                loading
+                  ? `Processing...`
+                  : `Pay - ${orderInfo && orderInfo.totalPrice}`
+              }
             />
           </form>
         </div>
