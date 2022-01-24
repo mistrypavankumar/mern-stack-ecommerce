@@ -24,7 +24,7 @@ const Navbar = ({ webName, menuOptions }) => {
 
   return (
     <>
-      <div className="w-full absolute top-0 z-50 bg-primaryBlue py-4 md:py-5 px-8 lg:px-24 rounded-bl-3xl rounded-br-3xl text-primaryBlue border-b-2 border-b-borderGlowBlue shadow-lg shadow-cyan-500/50">
+      <div className="w-[100%] absolute top-0 z-50 bg-primaryBlue py-4 md:py-5 px-8 lg:px-24 rounded-bl-3xl rounded-br-3xl text-primaryBlue border-b-2 border-b-borderGlowBlue shadow-lg shadow-cyan-500/50">
         <div className="flex justify-between items-center">
           <Link to="/">
             <h1 className="font-bold text-lg md:text-xl">{webName}</h1>

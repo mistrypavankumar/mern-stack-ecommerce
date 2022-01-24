@@ -5,7 +5,7 @@ import Footer from "./components/layout/Footer/Footer";
 import footerData from "./data/footerData.json";
 import "./App.css";
 
-import { useDispatch } from "react-redux";
+import store from "./store";
 import { loadUser } from "./actions/userAction";
 import ElementWithRoutes from "./routes/ElementWithRoutes";
 import axios from "axios";
@@ -31,7 +31,6 @@ const menuOptions = [
 
 function App() {
   const [stripeApikey, setStripeApiKey] = useState("");
-  const dispatch = useDispatch();
 
   async function getStripeApiKey() {
     const { data } = await axios.get("/api/v1/stripeapikey");
@@ -47,13 +46,13 @@ function App() {
     });
 
     // loading user data
-    dispatch(loadUser());
+    store.dispatch(loadUser());
 
     getStripeApiKey();
-  }, [dispatch]);
+  }, []);
 
   // make user not to inspect the page
-  window.addEventListener("contextmenu", (e) => e.preventDefault());
+  // window.addEventListener("contextmenu", (e) => e.preventDefault());
 
   return (
     <>

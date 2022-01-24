@@ -150,7 +150,7 @@ const Shipping = () => {
               </div>
             </div>
 
-            <Button disabled={state ? false : true} label="Continue" />
+            <Button label="Continue" />
           </form>
         </div>
       </div>

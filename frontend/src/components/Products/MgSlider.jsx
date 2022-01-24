@@ -49,8 +49,6 @@ const MgSlider = ({ slides, children, width, height, borderRadius }) => {
     return null;
   }
 
-  console.log(length);
-
   return (
     <HeroSection
       borderRadius={borderRadius}

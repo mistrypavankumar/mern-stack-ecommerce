@@ -19,7 +19,7 @@ const CartItemCard = ({ item, deleteCartItems }) => {
         <span className="text-slate-600">{`Price: ₹${item.price}`}</span>
         <p
           onClick={() => deleteCartItems(item.product)}
-          className="bg-red-300 hover:bg-red-400 hover:shadow-lg transition-all duration-500 text-white cursor-pointer py-[0.1em] rounded-md text-center mt-2"
+          className="bg-red-300 w-[150px] hover:bg-red-400 hover:shadow-lg transition-all duration-500 text-white cursor-pointer py-[0.1em] rounded-md text-center mt-2"
         >
           Remove
         </p>

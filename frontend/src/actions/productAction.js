@@ -29,12 +29,11 @@ import {
   DELETE_REVIEW_REQUEST,
   DELETE_REVIEW_SUCCESS,
   DELETE_REVIEW_FAIL,
-  DELETE_REVIEW_RESET,
 } from "../constants/productConstants";
 
 // fetching all products
 export const getProduct =
-  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  (keyword = "", currentPage = 1, price = [0, 250000], category, ratings = 0) =>
   async (dispatch) => {
     try {
       dispatch({

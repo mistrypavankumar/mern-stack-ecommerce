@@ -21,7 +21,7 @@ const Footer = ({ jsonData }) => {
   ];
 
   return (
-    <div className="bg-primaryBlue">
+    <div className="bg-primaryBlue w-[100%]">
       <div className="flex flex-col lg:justify-center lg:flex-row py-16 px-8 lg:px-24">
         <div className="lg:w-1/4 flex items-center">
           <h1 className="text-primaryBlue font-bold text-2xl text-center md:text-left pb-5">
@@ -33,13 +33,13 @@ const Footer = ({ jsonData }) => {
             {heading.aboutus}
           </h1>
           <p className="mt-5 text-lightGray">{footerData.aboutCompany}</p>
-          <div className="flex gap-3 mt-5 justify-start items-center">
+          <div className="flex gap-2 mt-5  justify-start items-center">
             {socailMediaData &&
               socailMediaData.map((data, index) => {
                 return (
                   <a
                     key={index}
-                    className="rounded-xl hover:bg-secondaryColor transition-all duration-500 text-white"
+                    className="rounded-full h-fit w-fit  transition-all duration-500 text-white"
                     href={data.link}
                   >
                     <CustomIcon Icon={socialMediaIcons[index]} />
