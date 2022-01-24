@@ -93,7 +93,6 @@ const Payment = () => {
           };
 
           dispatch(createOrder(order));
-
           navigate("/success", { replace: true });
         } else {
           alert.error("There's some issue while processing payment");

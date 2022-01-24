@@ -6,7 +6,7 @@ const Banner = ({ jsonData }) => {
   const data = jsonData[0];
 
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-primaryBlue customBanner">
+    <div className="w-[100%] h-screen flex justify-center items-center bg-primaryBlue customBanner">
       <div className="flex justify-center flex-col items-center px-8 md:px-0">
         <h1 className="text-2xl font-bold text-lightGray text-center">
           Welcome to{" "}

@@ -84,9 +84,9 @@ const LoginSignUp = () => {
 
     if (registerPassword !== cpassword) {
       alert.error("password doesn't match");
+    } else {
+      dispatch(register(myForm));
     }
-
-    dispatch(register(myForm));
   };
 
   const registerDataChange = (e) => {
@@ -226,6 +226,7 @@ const LoginSignUp = () => {
                       name="avatar"
                       accept="image/*"
                       onChange={registerDataChange}
+                      required
                     />
                   </div>
                 </div>

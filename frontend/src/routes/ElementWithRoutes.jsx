@@ -33,11 +33,24 @@ import ProcessOrder from "../pages/admin/ProcessOrder";
 import UserList from "../pages/admin/UserList";
 import UpdateUser from "../pages/admin/UpdateUser";
 import ProductReviews from "../pages/admin/ProductReviews";
+import { useSelector } from "react-redux";
 
 const ElementWithRoutes = ({ stripeApiKey }) => {
+  const { isAuthenticated } = useSelector((state) => state.user);
   return (
     <>
       <Routes>
+        {stripeApiKey && isAuthenticated && (
+          <Route
+            path="/process/payment"
+            element={
+              <Elements stripe={loadStripe(stripeApiKey)}>
+                <Payment />
+              </Elements>
+            }
+          />
+        )}
+
         <Route path="/" element={<HomePage />} />
 
         <Route path="/product/:id" element={<ProductDetails />} />
@@ -58,17 +71,6 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
           <Route path="/shipping" element={<Shipping />} />
 
           <Route path="/order/confirm" element={<ConfrimOrder />} />
-
-          {stripeApiKey && (
-            <Route
-              path="/process/payment"
-              element={
-                <Elements stripe={loadStripe(stripeApiKey)}>
-                  <Payment />
-                </Elements>
-              }
-            />
-          )}
 
           <Route path="/success" element={<OrderSuccess />} />
           <Route path="/orders/me" element={<MyOrders />} />

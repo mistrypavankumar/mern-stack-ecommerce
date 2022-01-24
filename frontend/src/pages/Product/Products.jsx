@@ -57,7 +57,7 @@ const Products = () => {
       ) : (
         <Fragment>
           <MetaData title="Products | E-Commerce" />
-          <div className="h-auto py-24 md:px-10 ">
+          <div className="h-auto w-[100%] py-24 md:px-10 ">
             <h1 className="headingStyle">
               <div className="headingStylesDiv" />
               Products

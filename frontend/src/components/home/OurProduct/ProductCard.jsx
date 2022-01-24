@@ -13,21 +13,27 @@ const ProductCard = ({ product }) => {
   return (
     <Link
       to={`/product/${product._id}`}
-      className="flex flex-col w-56 m-auto rounded-lg shadow-lg bg-secColor overflow-hidden md:hover:shadow-xl transition-all duration-300 md:hover:scale-105 group decoration-transparent"
+      className="flex flex-col justify-between w-60 h-[400px] m-auto rounded-lg shadow-lg bg-secColor overflow-hidden md:hover:shadow-xl transition-all duration-300 md:hover:scale-105 group decoration-transparent"
     >
-      <div className="relative overflow-hidden">
-        <img src={product.images[0].url} alt={product.name} />
-
-        {product.numOfReviews !== 0 && (
-          <div className="absolute bottom-0 bg-primaryBlue/90 w-full opacity-0 group-hover:opacity-100 translate-y-1/2 group-hover:translate-y-0 transition-all duration-500 flex justify-center items-center flex-col py-2">
-            <Rating {...options} />{" "}
-            <span className="text-white">({product.numOfReviews} reviews)</span>
-          </div>
-        )}
+      <div className="h-fit overflow-hidden">
+        <img
+          className="object-cover"
+          src={product.images[0].url}
+          alt={product.name}
+        />
       </div>
 
-      <div className="px-3 py-3 text-center">
-        <p className="text-secondaryDark font-bold text-md capitalize">
+      <div className="px-3 py-2 text-center bg-white">
+        {/* {product.numOfReviews !== 0 && ( */}
+        <div className="w-full flex justify-center items-center flex-col pb-1">
+          <Rating {...options} />{" "}
+          <span className="text-gray-500">
+            ({product.numOfReviews} reviews)
+          </span>
+        </div>
+        {/* )} */}
+
+        <p className="text-secondaryDark font-bold text-md capitalize line-clamp-2">
           {product.name}
         </p>
 

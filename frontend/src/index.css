@@ -34,15 +34,15 @@
   }
 
   .headingStyle {
-    @apply text-center font-semibold text-2xl md:text-3xl text-secondaryDark border-b-4 border-secondaryDark w-72 md:w-1/4 m-auto py-3 relative;
+    @apply w-fit mx-auto mb-5 text-2xl md:text-3xl text-secondaryDark font-semibold pb-3 border-b-4 border-secondaryDark relative before:content-[''] before:absolute before:w-[50px] before:h-[10px] before:rounded-md before:bg-secondaryDark before:-bottom-[7px] before:left-[50%]  before:-translate-x-[50%];
   }
 
-  .headingStylesDiv {
+  /* .headingStylesDiv {
     @apply w-10 h-3 rounded-md bg-secondaryDark absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1.5;
-  }
+  } */
 
   .productsLayoutStyle {
-    @apply flex flex-wrap px-24 gap-5 mt-10;
+    @apply flex justify-center items-center flex-wrap px-8 md:px-24 gap-5 mt-10;
   }
 
   .filterHeadingStyle {

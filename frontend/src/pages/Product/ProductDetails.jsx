@@ -100,14 +100,12 @@ const ProductDetails = () => {
     setOpen(false);
   };
 
-  // console.log(product);
-
   return (
     <Fragment>
       {loading ? (
         <Loader />
       ) : (
-        <div className="w-full py-24 px-8 md:px-24 flex flex-col md:flex-row justify-center bg-secColor">
+        <div className="w-full py-24 px-8 sm:15 md:px-24 flex flex-col md:flex-row justify-center bg-secColor">
           <MetaData title={`${product.name} | E-Commerce`} />
           <div className="w-full flex justify-center md:w-1/2 md:p-10 overflow-hidden ">
             {/* <Carousel className="w-full md:w-3/5">
@@ -117,7 +115,11 @@ const ProductDetails = () => {
                 })}
             </Carousel> */}
 
-            <MgSlider slides={product.images && product.images} />
+            <MgSlider
+              width="300px"
+              height="500px"
+              slides={product.images && product.images}
+            />
           </div>
 
           <div className="md:p-10 md:w-1/2 ">
@@ -154,7 +156,7 @@ const ProductDetails = () => {
                 <button
                   disabled={product.stock < 1 ? true : false}
                   onClick={addToCartHandler}
-                  className="commonBtnStyle mx-auto md:mx-0 py-2 px-5 w-1/3 md:w-1/3 bg-primaryBlue"
+                  className="commonBtnStyle mx-auto md:mx-0 py-2 px-5 w-full sm:w-1/2 md:w-[150px] bg-primaryBlue"
                 >
                   Add to Cart
                 </button>
@@ -180,7 +182,7 @@ const ProductDetails = () => {
             <div className="flex justify-center md:justify-start">
               <button
                 onClick={submitReviewToggle}
-                className="commonBtnStyle w-1/2 md:w-1/3 py-2 px-10 bg-secondaryDark hover:scale-105 outline-none"
+                className="commonBtnStyle w-full sm:w-1/2 md:w-[150px] py-2 px-10 bg-secondaryDark hover:scale-105 outline-none"
               >
                 Add Review
               </button>
