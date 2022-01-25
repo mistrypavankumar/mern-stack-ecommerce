@@ -41,62 +41,60 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
   return (
     <>
       <Routes>
-        {stripeApiKey && (
-          <Route
-            path="/process/payment"
-            element={
-              <Elements stripe={loadStripe(stripeApiKey)}>
-                <Payment />
-              </Elements>
-            }
-          />
-        )}
-
         <Route path="/" element={<HomePage />} />
-
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
-
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/search" element={<SearchProducts />} />
 
-        {/* Protected routes starts */}
-
-        <Route element={<ProtectedRoute />}>
-          <Route path="/account" element={<Profile />} />
-          <Route path="/update" element={<UpdateProfile />} />
-          <Route path="/password/update" element={<UpdatePassword />} />
-
-          <Route path="/shipping" element={<Shipping />} />
-
-          <Route path="/order/confirm" element={<ConfrimOrder />} />
-
-          <Route path="/success" element={<OrderSuccess />} />
+        {/* When user get logged in*/}
+        <Route exact path="/" element={<ProtectedRoute />}>
+          <Route exact path="/account" element={<Profile />} />
+          <Route exact path="/update" element={<UpdateProfile />} />
+          <Route exact path="/password/update" element={<UpdatePassword />} />
+          <Route exact path="/shipping" element={<Shipping />} />
+          <Route exact path="/success" element={<OrderSuccess />} />
+          <Route
+            exact
+            path="/process/payment/*"
+            element={
+              stripeApiKey && (
+                <Elements stripe={loadStripe(stripeApiKey)}>
+                  <Routes>
+                    <Route path="/" element={<Payment />} />
+                  </Routes>
+                </Elements>
+              )
+            }
+          />
           <Route path="/orders/me" element={<MyOrders />} />
+          <Route exact path="/order/confirm" element={<ConfrimOrder />} />
           <Route path="/order/:id" element={<OrderDetails />} />
-
-          <Route element={<AdminProtectedRoute isAdmin={true} />}>
-            <Route path="/admin/dashboard" element={<Dashboard />} />
-            <Route path="/admin/products" element={<ProductList />} />
-            <Route path="/admin/product" element={<CreateNewProduct />} />
-            <Route path="/admin/product/:id" element={<UpdateProduct />} />
-            <Route path="/admin/orders" element={<OrdersList />} />
-            <Route path="/admin/order/:id" element={<ProcessOrder />} />
-            <Route path="/admin/users" element={<UserList />} />
-            <Route path="/admin/user/:id" element={<UpdateUser />} />
-            <Route path="/admin/reviews" element={<ProductReviews />} />
-          </Route>
         </Route>
 
-        {/* Protected routes ends */}
+        {/* When admin is logged in */}
+        <Route exact path="/" element={<AdminProtectedRoute />}>
+          <Route exact path="/admin/dashboard" element={<Dashboard />} />
+          <Route exact path="/admin/products" element={<ProductList />} />
+          <Route exact path="/admin/product" element={<CreateNewProduct />} />
+          <Route exact path="/admin/product/:id" element={<UpdateProduct />} />
+          <Route exact path="/admin/orders" element={<OrdersList />} />
+          <Route exact path="/admin/order/:id" element={<ProcessOrder />} />
+          <Route exact path="/admin/users" element={<UserList />} />
+          <Route exact path="/admin/user/:id" element={<UpdateUser />} />
+          <Route exact path="/admin/reviews" element={<ProductReviews />} />
+        </Route>
 
-        <Route path="/cart" element={<Cart />} />
-
-        <Route path="/login" element={<LoginSignUp />} />
-        <Route path="/password/forgot" element={<ForgotPassword />} />
-        <Route path="/password/reset/:token" element={<ResetPassword />} />
+        <Route exact path="/login" element={<LoginSignUp />} />
+        <Route exact path="/password/forgot" element={<ForgotPassword />} />
+        <Route
+          exact
+          path="/password/reset/:token"
+          element={<ResetPassword />}
+        />
+        <Route exact path="/cart" element={<Cart />} />
 
         {/* If router is not specified then show below page */}
         <Route path="*" element={<PageNotFound />} />

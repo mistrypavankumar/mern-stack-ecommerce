@@ -101,7 +101,7 @@ const Dashboard = () => {
               className="summryBoxStyle bg-primaryBlue"
               to="/admin/products"
             >
-              <p>Product</p>
+              <p>Products</p>
               <p>{products && products.length}</p>
             </Link>
             <Link

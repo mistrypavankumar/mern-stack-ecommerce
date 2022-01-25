@@ -36,7 +36,7 @@ const ProductList = () => {
 
     if (isDeleted) {
       alert.success("Product is Deleted Successfully");
-      navigate("/admin/dashboard");
+      navigate("/admin/products");
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
 

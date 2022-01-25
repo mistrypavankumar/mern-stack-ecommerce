@@ -68,7 +68,13 @@ const Navbar = ({ webName, menuOptions }) => {
           </div>
         </div>
       </div>
-      {toggleSidebar && (
+      {toggleSidebar ? (
+        <Slider
+          menuOptions={menuOptions}
+          setCloseToggle={setToggleSidebar}
+          closeToggle={toggleSidebar}
+        />
+      ) : (
         <Slider
           menuOptions={menuOptions}
           setCloseToggle={setToggleSidebar}
