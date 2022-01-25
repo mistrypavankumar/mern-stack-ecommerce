@@ -2,18 +2,12 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const AdminProtectedRoute = ({ isAdmin }) => {
+const AdminProtectedRoute = ({ element: Element, ...rest }) => {
   const { loading, user } = useSelector((state) => state.user);
   return (
     <>
-      {loading === false && (
-        <>
-          {isAdmin === true && user.role !== "admin" ? (
-            <Navigate to="/login" />
-          ) : (
-            <Outlet />
-          )}{" "}
-        </>
+      {!loading && (
+        <>{user.role === "admin" ? <Outlet /> : <Navigate to="/login" />} </>
       )}
     </>
   );

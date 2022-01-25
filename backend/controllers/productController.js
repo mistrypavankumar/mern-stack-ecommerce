@@ -128,15 +128,26 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
 exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const resultPerPage = 8;
   const productsCount = await Product.countDocuments();
-
-  const apiFeatures = new ApiFeatures(Product.find(), req.query)
+  // querying a keyword, filtering the data and changing page with new data in your API
+  const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
-    .filter()
-    .pagination(resultPerPage);
-  const products = await apiFeatures.query;
-  res
-    .status(200)
-    .json({ success: true, products, productsCount, resultPerPage });
+    .filter();
+
+  let products = await apiFeature.query;
+
+  let filteredProductsCount = products.length;
+
+  apiFeature.pagination(resultPerPage);
+
+  products = await apiFeature.query.clone();
+
+  res.status(200).json({
+    success: true,
+    products,
+    productsCount,
+    resultPerPage,
+    filteredProductsCount,
+  });
 });
 
 // Get all products -- admin

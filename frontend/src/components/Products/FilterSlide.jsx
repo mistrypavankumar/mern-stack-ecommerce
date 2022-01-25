@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import Slider from "@material-ui/core/Slider";
 import { MdClose, MdArrowForward } from "react-icons/md";
-import { Typography } from "@material-ui/core";
 
 const FilterSlide = ({
   price,
@@ -42,8 +41,8 @@ const FilterSlide = ({
       <div
         className={` w-full h-auto md:w-80 absolute left-0 top-32 shadow-xl border-r-2 py-5 rounded-r-lg px-5 z-20 transition-all duration-500 bg-primaryBlue  ${
           toggleFilterSlider
-            ? "animate-slide-in block"
-            : "-translate-x-96 hidden"
+            ? "animate-slide-in"
+            : "-left-[100%] -translate-x-96"
         }`}
       >
         <div className="flex justify-between items-center">
@@ -87,12 +86,7 @@ const FilterSlide = ({
 
           <div>
             <fieldset>
-              <Typography
-                className="filterHeadingStyle pt-3"
-                component="legend"
-              >
-                Ratings Above
-              </Typography>
+              <p className="filterHeadingStyle pt-3">Ratings Above</p>
               <Slider
                 value={ratings}
                 onChange={(e, newRatings) => setRatings(newRatings)}
