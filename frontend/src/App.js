@@ -32,11 +32,11 @@ const menuOptions = [
 function App() {
   const [stripeApikey, setStripeApiKey] = useState("");
 
-  async function getStripeApiKey() {
+  const getStripeApiKey = async () => {
     const { data } = await axios.get("/api/v1/stripeapikey");
 
     setStripeApiKey(data.stripeApiKey);
-  }
+  };
 
   useEffect(() => {
     WebFont.load({
@@ -49,7 +49,7 @@ function App() {
     store.dispatch(loadUser());
 
     getStripeApiKey();
-  }, [stripeApikey]);
+  }, []);
 
   // make user not to inspect the page
   // window.addEventListener("contextmenu", (e) => e.preventDefault());
