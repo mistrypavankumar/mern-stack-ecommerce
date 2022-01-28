@@ -54,7 +54,7 @@ const ElementWithRoutes = ({ stripeApiKey }) => {
           <Route exact path="/account" element={<Profile />} />
           <Route exact path="/update" element={<UpdateProfile />} />
           <Route exact path="/password/update" element={<UpdatePassword />} />
-          <Route exact path="/shipping" element={<Shipping />} />
+          <Route exact path="/login/shipping" element={<Shipping />} />
           <Route exact path="/success" element={<OrderSuccess />} />
           <Route
             exact
