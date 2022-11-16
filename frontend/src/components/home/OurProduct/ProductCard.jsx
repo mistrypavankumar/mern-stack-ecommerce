@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
     >
       <div className="h-fit overflow-hidden">
         <img
-          className="object-cover"
+          className="object-contain"
           src={product.images[0].url}
           alt={product.name}
         />

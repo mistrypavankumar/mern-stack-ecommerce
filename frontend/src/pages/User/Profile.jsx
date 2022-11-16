@@ -27,7 +27,7 @@ const Profile = () => {
                 My Profile
               </h1>
               <img
-                className="w-60 rounded-full shadow-xl border-4 border-primaryDarkBlue transition-transform duration-500 hover:scale-105"
+                className="w-60 h-60 rounded-full shadow-xl border-4 border-primaryDarkBlue transition-transform duration-500 hover:scale-105"
                 src={user.avatar.url ? user.avatar.url : "/profile.png"}
                 alt={user.name}
               />

@@ -9,13 +9,6 @@ import { clearErrors, getProduct } from "../actions/productAction";
 import Loader from "../components/layout/Loader/Loader";
 import { useAlert } from "react-alert";
 
-// const products = {
-//   name: "Blue Shirt",
-//   images: [{ url: "https://i.ibb.co/DRST11n/1.webp" }],
-//   price: "Rs.3000",
-//   _id: "pavankumar",
-// };
-
 const HomePage = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
